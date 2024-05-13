@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Home Page</title>
+
+  <!-- Add Bootstrap CSS from the CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/admi.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Buttons in the top-right corner -->
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="mb-4">Admin Home Page</h1>
+      <div>
+        <a href="/admin/add"><button class="btn btn-add btn-primary mr-2">Add</button></a>
+        <a href="/logout"><button class="btn btn-logout btn-secondary" >Logout</button></a>
+      </div>
+    </div>
+
+    <!-- Search bar -->
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search users" id="searchInput">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
+      </div>
+    </div>
+
+    <!-- User details table -->
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Firstname</th>
+          <th scope="col">Lastname</th>
+          <!-- <th scope="col">Last</th> -->
+          <th scope="col">Email</th>
+          <th scope="col">EDIT</th>
+          <th scope="col">DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+      
+          <% userstorage.forEach(function(usermodel) { %>
+            <tr>
+              <td><%= usermodel.firstname %></td>
+              <td><%= usermodel.lastname %></td>
+              <td><%= usermodel.email %></td>
+              <td> <a href="/admin/edit?<%= usermodel._id %>"><button class="btn btn-info btn-sm">Edit</button></a></td>
+            <form action="/admin/deleteUser/1" method="post">
+              <td> <button type="submit" class="btn btn-danger btn-sm">Delete</button></td>
+            </form>
+          </td>
+            </tr>
+          <% }) %>
+            
+      
+        
+      </tbody>
+    </table>
+    <!-- End of replaced table -->
+  </div>
+
+  <!-- Add jQuery and Bootstrap JavaScript from the CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+  <script src="/javascripts/admin.js"></script>
+
+
+  <script>
+    // Your additional scripts go here if needed
+  </script>
+</body>
+</html>

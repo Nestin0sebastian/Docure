@@ -1,0 +1,23 @@
+body {
+    background-image: url(https://img.freepik.com/premium-photo/abstract-background-images-wallpaper-ai-generated_643360-70652.jpg);
+    background-size: cover;
+    background-position: center;
+  }
+  .container {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 25px;
+    box-shadow: 2PX 2PX 50PX rgba(0, 0, 0, 0.397);
+  }
+  .btn-add {
+    background-color: #28a745;
+    color: #fff;
+  }
+  .btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  .table th, .table td {
+    vertical-align: middle;
+  }

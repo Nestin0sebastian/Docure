@@ -1,0 +1,15 @@
+body{
+    height: 100vh;
+    background-image: url(https://as2.ftcdn.net/v2/jpg/01/62/76/57/1000_F_162765779_AQ9TlSDolclHQvgKceJZbbIq5wzuv63w.jpg);
+    background-position: center;
+    background-size: cover;
+}
+#forms{
+    background-color: aqua;
+    height: 250px;
+    width: 350px;
+    text-align: center;
+    border-radius: 25px;
+    background-color: rgba(255, 247, 247, 0.123);
+    box-shadow: 2px 2px 100px rgba(53, 52, 52, 0.459);
+}

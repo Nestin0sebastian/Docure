@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Your custom CSS can go here if needed -->
+    <link rel="stylesheet" href="/stylesheets/sign.css">
+</head>
+<body>
+
+<!-- Your existing HTML code here -->
+
+<div id="bodymain">
+    <!-- Section: Design Block -->
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" id="bgg">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center" style="
+        margin-top: 50px;">
+          <div class="col-lg-6 mb-5 mb-lg-0" id="hidex">
+            <h1 class="text-white">
+              When you smile, <br />
+              <span class="text-white"> The world smiles with you!</span>
+            </h1>
+            <p style="color: hsl(65, 100%, 39%); font-family: 'Arial', sans-serif; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); letter-spacing: 2px;">
+             - DOCURE group
+          </p>
+          
+          </div>
+  
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card" id="blackCard">
+              <div class="card-body py-5 px-md-5">
+                <form id="formm" action="/signupPost" method="post">
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example1" class="form-control" name="firstname" />
+                        <label class="form-label" for="form3Example1">First name</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example2" class="form-control" name="lastname"/>
+                        <label class="form-label" for="form3Example2">Last name</label>
+                       
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input type="email"  id="contact-email"  class="form-control" name="email"  onkeyup="validatEmail()" />
+                    <label class="form-label" for="form3Example3" >Email address</label>
+                    <span id="email-error"></span>
+                  </div>
+  
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <input type="password" id="password"  class="form-control" name="password"  onkeyup="validatpass()"  />
+                    <label class="form-label" for="form3Example4">Password</label>
+                    <span id="password-error"></span>
+                  </div>
+               
+                  <div class="form-outline mb-4">
+                    <input type="password" id="password"  class="form-control" name="conformPassword"  onkeyup="validatpass()"  />
+                    <label class="form-label" for="form3Example4">Conform Password</label>
+                    <span id="password-error"></span>
+                  </div>
+                  
+  
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-block mb-4" id="submit" onclick="return validForm()">
+                    Sign up
+                  </button>
+                  <span id="submit-error"></span>
+                  <p><a href="/login">already have an account?</a></p>
+  
+                
+
+  
+  
+                   
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+</div>
+
+<!-- Add Bootstrap JS and jQuery (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/javascripts/sign.js"></script>
+</body>
+</html>

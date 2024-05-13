@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Your custom CSS can go here if needed -->
+    <link rel="stylesheet" href="/stylesheets/sign.css">
+</head>
+<body>
+
+<!-- Your existing HTML code here -->
+
+<div id="bodymain">
+    <!-- Section: Design Block -->
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" id="bgg">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center" style="
+        margin-top: 50px; ">
+          
+  
+          <div class="col-lg-6 mb-5 mb-lg-0" style="
+          margin-left: 260px;">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <form id="formm" action="" method="post">
+                  
+                  <h2 style="padding-bottom: 20px;">edit user</h2>
+                 
+                  
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
+                  
+                  
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example1" class="form-control" name="firstname" placeholder="" required value="<%= user.firstname%>"/>
+                        <label class="form-label" for="form3Example1">First name</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example2" class="form-control" name="lastname" placeholder="" required value="<%= user.lastname%>"/>
+                        <label class="form-label" for="form3Example2">Last name</label>
+                       
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input type="email"  id="contact-email"  class="form-control" name="email"  onkeyup="validatEmail()" placeholder="" required value="<%= user.email%>" />
+                    <label class="form-label" for="form3Example3" >Email address</label>
+                    <span id="email-error"></span>
+                  </div>
+                  
+                  <!-- Password input -->
+                  
+  
+                  
+  
+                  <!-- Submit button -->
+                  
+                    <button type="submit" class="btn btn-primary btn-block mb-4" id="submit" onclick="return validForm()">
+                      Update user
+                    </button>
+                  
+                  <span id="submit-error"></span>
+                  
+  
+                
+
+  
+  
+                   
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+</div>
+
+<!-- Add Bootstrap JS and jQuery (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/javascripts/sign.js"></script>
+</body>
+</html>

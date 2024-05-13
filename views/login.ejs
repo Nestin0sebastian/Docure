@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Your custom CSS can go here if needed -->
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <style>
+
+        
+    </style>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+</head>
+<body>
+
+<!-- Your existing HTML code here -->
+<div id="bodymain">
+    <section class="vh-100" id="bgg">
+        <div class="container py-5 h-100">
+          
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+
+              <div class="card shadow-2-strong bg-dark text-white" style="border-radius: 1rem;">
+
+                <div class="card-body p-5 text-center">
+                    <form action="/loginpost" method="post">
+                        <div class="form-outline mb-4">
+                            <input type="email" id="contact-email" class="form-control form-control-lg" onkeyup="validatEmail()" name="email" />
+                            <label class="form-label" for="typeEmailX-2">Email</label>
+                            <span id="email-error"></span>
+                        </div>
+            
+                        <div class="form-outline mb-4">
+                            <input type="password" id="password" class="form-control form-control-lg" onkeyup="validatpass()" name="password" />
+                            <label class="form-label" for="typePasswordX-2">Password</label>
+                            <span id="password-error"></span>
+                        </div>
+            
+                        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit" onclick="return validForm()">Login</button>
+                        <span id="submit-error"></span>
+            
+                        <hr class="my-4">
+                    </form>
+                    <div style="display: flex; justify-content: space-between;">
+                        <h6><a href="/signup" class="text-white">Create account?</a></h6>
+                        <p><a href="/forgotpassword" class="text-white" style="font-size: 11px;">Forgot password?</a></p>
+
+                    </div>
+                    
+                </div>
+            </div>
+            
+            </div>
+          </div>
+          <p style="color: hsl(0, 0%, 100%); font-family: 'Pacifico', cursive; font-size: 24px; text-shadow: 2px 2px 4px rgba(39, 145, 116, 0.695); letter-spacing: 2px; text-align: center; margin-top: -28px;">
+            Join us in creating smiles that last a lifetime.
+        </p>
+        
+        
+        
+        </div>
+      </section>
+</div>
+
+<!-- Add Bootstrap JS and jQuery (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/javascripts/log.js"></script>
+</body>
+</html>

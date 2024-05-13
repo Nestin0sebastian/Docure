@@ -1,0 +1,30 @@
+#bodymain {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+#bgg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://media.springernature.com/w580h326/nature-cms/uploads/collections/BDJ_Digital_Dentistry_Hero_Image-496e0e3a937bab057622f258d85c4724.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#bgg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 20, 20, 0.437); /* Adjust the alpha value to control the darkness */
+}
+.bg-dark {
+    background-color: rgba(0, 0, 0, 0.591) !important;
+}

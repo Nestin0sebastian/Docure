@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "poppins";
+}
+
+header {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5),rgba(0,0,0,0.5)), url("https://as2.ftcdn.net/v2/jpg/01/62/76/57/1000_F_162765779_AQ9TlSDolclHQvgKceJZbbIq5wzuv63w.jpg");
+  height: 800px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 30px;
+}
+
+.header__navegation ul{
+  display: flex ;
+  justify-content: end;
+  list-style: none;
+  gap: 30px;
+  color: #fff;
+}
+
+.header__navegation a {
+  position: relative;
+  color: #c2c2c2;
+  text-decoration: none;
+  padding-bottom: 5px;
+  font-size: 1.1em;
+}
+
+.header__navegation a::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: rgb(31, 31, 235);
+  transition: all .5s ease;
+}
+
+.header__navegation a:hover::after {
+  width: 100%;
+}
+
+.header__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 98%;
+}
+
+.header__content h1 {
+  color: #fff;
+  font-size: 3.125em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.header__content h2 {
+  color: #e0e0e0;
+  font-size: 1.875em;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.btn {
+  padding: 15px 20px;
+  background-color: rgb(31, 31, 235);
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.btn:hover {
+  background-color: rgb(25, 25, 194);
+}
+
+.main {
+  background-color: #18181B;
+  position: relative;
+}
+.main__fill {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+main {
+  padding: 40px 20px;
+  position: relative;
+}
+
+.main__fill h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 1.5em;
+  text-align: center;
+}
+
+.main__planes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.planes__caja {
+  width: 350px; /* Ajustar al 100% del ancho de la columna del grid */
+  border-radius: 1em;
+  padding: 20px;
+  flex-wrap: nowrap;
+  background: linear-gradient(0deg, rgb(51, 51, 51) 5%, #18181B 65%);
+  cursor: pointer;
+  transition: background 1s ease;
+}
+
+.planes__caja:hover {
+  background: linear-gradient(0deg, rgb(78, 78, 78) 5%, #18181B 65%);
+}
+
+.planes__caja span {
+  display: block;
+  color: rgb(25, 25, 194);
+  font-size: 1.5em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px dashed gray;
+}
+
+.planes__precie {
+  color: #fff;
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.planes__caja p {
+  color: #fff;
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  body {
+    font-size: 14px;
+  }
+  background-image {
+    background-position: center center;
+  }
+}
+
+@media (max-width: 800px) {
+  .header__navegation ul {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

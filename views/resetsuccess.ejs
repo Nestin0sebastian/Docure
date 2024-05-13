@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verified</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.success-card {
+    position: relative;
+    max-width: 400px;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.background-img {
+    width: 100%;
+    height: auto;
+    filter: brightness(70%);
+}
+
+.content {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h2 {
+    color: #4caf50;
+    margin-bottom: 20px;
+}
+
+.success-icon {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #388e3c;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-card">
+            <div class="content">
+                <h2>success!</h2>
+                <p>Password changed successfully.</p>
+                <button onclick="window.location.href='/login'">Login</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

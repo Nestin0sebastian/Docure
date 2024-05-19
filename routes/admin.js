@@ -1,130 +1,54 @@
 var express = require('express');
 var router = express.Router();
-const model = require('../model/schema')
-const adminmodel=require('../model/adminschema')
-const usermodel=require('../model/schema')
-/*GET home page.*/
+const admin = require('../controllers/adminController')
+const category = require('../controllers/catagoryController')
+const path = require('path');
 
+const multer=require('multer')
 
-router.get('/adminlog',(req,res)=>{
-  try{
-  res.render('admindisplay')
-}
-catch(error){
-  console.log(error)
-}})
-
-router.post('/adminlog',async(req,res)=>{
-  const email =req.body.email
-  const password=req.body.password
-const [adminstorage]=await adminmodel.aggregate([
-  {
-    $match:{email:email
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads'); // Directory to save uploaded files
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname)); // Save file with a timestamp
     }
-  }
-])
-if(adminstorage){
-if(password===adminstorage.password){
-  
-res.redirect('/admin/home2')}
-}
-
-console.log(adminstorage)
-})
-
-
-
-router.get('/home2',(req,res)=>{
-  try{
-  res.render('homepage/home2')
-}
-catch(error){
-  console.log(error)
-}})
-
-
-
-router.get('/edit',(req,res)=>{
-  try{
-  res.render('adduser/sign')
-}
-catch(error){
-  console.log(error)
-}})
-
-
-
-
-
-
-
-router.get('/add',(req,res)=>{
-  try{
-  res.render('adduser/sign')
-}
-catch(error){
-  console.log(error)
-}})
-
-
-router.get('/users',async(req,res)=>{
-  try{
-    const userstorage= await usermodel.find({})
-    console.log(userstorage)
-  res.render('userlist',{userstorage})
-
-}
-catch(error){
-  console.log(error)
-}})
-
-
-
-
-
-
-
-
-
-
-
-router.post('/deleteUser/:id', async (req, res) => {
-  res.setHeader('Cache-Control', 'no-store');
-
-  try {
-    const id = req.params.id;
-    const userData = await model.findOne({ _id: id });
-
-    if (userData) {
-      // Check if the user to be deleted is the currently logged-in admin
-      if (req.session.isadmin && req.session.user === userData.email) {
-        // Clear the session to log out the admin
-        req.session.destroy((err) => {
-          if (err) {
-            console.error(err);
-          }
-        });
-      }
-
-      // Delete the user from the database
-      await model.deleteOne({ _id: id });
-
-      return res.redirect('/admin');
-    } else {
-      // Handle user not found
-      return res.status(404).send("User not found");
-    }
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send("Internal Server Error");
-  }
 });
 
+const upload = multer({ storage: storage });
 
 
+router.get('/login',admin.login)
+
+router.post('/loginpost',admin.adminloginpost)
+
+router.get('/',admin.home)
+
+router.get('/addcategory',category.addcategory)
+
+router.post('/addcatagorypost',category.addcategorypost)
+
+router.get('/catagorylist',admin.catagorylist)
 
 
+router.get('/editcatagory/:id', admin.editget);
+
+router.post('/catagorypost/:id',admin.editpost)
+
+router.post('/blockcatagory/:userId',category.listed)
+
+router.get('/addoctor',admin.addoctor)
+
+router.post('/addoctorpost', upload.single('doctor_image'),admin. addoctorpost);
+
+router.get('/doctorlist',admin.doctorlist)
+
+router.get('/editdoctor/:id',admin.editdoctor)
+
+router.post('/editdoctorpost/:id',upload.single('doctor_image'),admin.editdoctorpost)
+
+router.post('/doctorlisted',admin.doctorlisted)
 
 
+module.exports =router
 
-module.exports = router;

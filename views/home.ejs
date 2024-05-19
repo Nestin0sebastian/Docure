@@ -23,6 +23,7 @@
         <link rel="icon" type="image/png" href="assets/img/favicon.webp">
     </head>
     <body>
+        <%- include('./partials/header.ejs')%>
 
         <!--  Preloader Start -->
         <div class="loader-wrapper">
@@ -47,226 +48,16 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8">
-                            <ul class="contact-info list-style">
-                                <li><i class="flaticon-mail"></i><a href="https://templates.hibotheme.com/cdn-cgi/l/email-protection#33404643435c414773575c5f471d505c5e"><span class="__cf_email__" data-cfemail="80f3f5f0f0eff2f4c0e4efecf4aee3efed">[email&#160;protected]</span></a></li>
-                                <li><i class="flaticon-pin"></i>86 Brattle Street Cambridge, MA 0138, USA</li>
-                            </ul>
+                           
                         </div>
                         <div class="col-lg-4">
                             <ul class="contact-info text-lg-end list-style">
-                                <li><i class="flaticon-clock"></i>Mon - Sat: 09.00 to 18.00, Sunday: Closed</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <nav class="navbar navbar-expand-lg">
-                    <a class="navbar-brand" href="index.html">
-                        <img class="logo-light" src="assets/img/logo.webp" alt="logo">
-                        <img class="logo-dark" src="assets/img/logo-white.webp" alt="logo">
-                    </a>
-                    <div class="other-option d-flex align-items-center justify-content-end d-lg-none">
-                        <button type="button" class="search-btn d-lg-none" data-bs-toggle="modal" data-bs-target="#searchModal">
-                            <i class="flaticon-search"></i>
-                        </button>
-                        <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
-                            <span class="burger-menu">
-                                <span class="top-bar"></span>
-                                <span class="middle-bar"></span>
-                                <span class="bottom-bar"></span>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link active">
-                                    Home
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="index.html" class="nav-link active">
-                                            Home Demo One
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-2.html" class="nav-link ">
-                                            Home Demo Two
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-3.html" class="nav-link">
-                                            Home Demo Three
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                    Dentists
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="dentists.html" class="nav-link">
-                                            All Dentists 
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="dentist-details.html" class="nav-link">
-                                            Dentist Details
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                    Services
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="service-style-one.html" class="nav-link">
-                                            Service Style One
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="service-style-two.html" class="nav-link">
-                                            Service Style Two
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="service-details.html" class="nav-link">
-                                            Service Details
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                    Pages
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="about.html" class="nav-link">
-                                            About Us
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="book-appointment.html" class="nav-link">
-                                            Book Appointment
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pricing-plan.html" class="nav-link">
-                                            Pricing Plan
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="testimonials.html" class="nav-link">
-                                            Testimonials
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            FAQ
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="privacy-policy.html" class="nav-link">
-                                            Privacy Policy
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="terms-conditions.html" class="nav-link">
-                                            Terms & Conditions
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="error-404.html" class="nav-link">
-                                            404 Error Page
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- <li class="nav-item">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                    Blog
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                            Blog Layout
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="blog-no-sidebar.html" class="nav-link">
-                                                    Blog Grid
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="blog-left-sidebar.html" class="nav-link">
-                                                    Blog Left Sidebar
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="blog-right-sidebar.html" class="nav-link">
-                                                    Blog Right Sidebar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                            Single Blog Layout
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="blog-details-no-sidebar.html" class="nav-link">
-                                                    Blog Details Without Sidebar
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="blog-details-left-sidebar.html" class="nav-link">
-                                                    Blog Details Left Sidebar
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="blog-details-right-sidebar.html" class="nav-link">
-                                                    Blog Details Right Sidebar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li> -->
-                            <li class="nav-item">
-                                <a href="contact.html" class="nav-link">
-                                    Contact Us
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="others-option d-flex align-items-center">
-                            <div class="option-item">
-                                <button type="button" class="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                    <i class="flaticon-search"></i>
-                                </button>
-                            </div>
-                            <div class="option-item">
-                                <div class="contact-item">
-                                    <i class="flaticon-emergency-call"></i>
-                                    <span>Phone Number</span>
-                                    <a href="tel:968547856254">+968 547856 254</a>
-                                </div>
-                            </div>
-                            <div class="option-item">
-                                <a class="sidebar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
-                                    <i class="flaticon-list"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+          
         </div>
         <!-- End Navbar Area -->
 
@@ -535,8 +326,9 @@
                     <div class="col-xl-7 col-lg-6">
                         <div class="hero-content">
                             <span><img src="assets/img/section-shape.svg" alt="Image">Dental Care For Everyone</span>
-                            <h1>An Attractive Smile Makes A Lasting <span>Impression!</span><img src="assets/img/section-shape-2.webp" alt="Image"></h1>
-                            <form action="#" class="hero-form">
+                            <h1>
+                                Discover nearby dental practitioners in your <span>vicinity!</span><img src="assets/img/section-shape-2.webp" alt="Image"></h1>
+                            <!-- <form action="#" class="hero-form">
                                 <div class="form-group">
                                     <label for="email"><i class="flaticon-mail"></i>Email Address</label>
                                     <input type="email" id="email" placeholder="Your Email">
@@ -552,7 +344,7 @@
                                 <div class="form-group">
                                     <button class="btn-two border-0">Book Now</button>
                                 </div>
-                            </form>
+                            </form> -->
                         </div>
                     </div>
                     <div class="col-xl-5 col-lg-6">

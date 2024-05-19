@@ -6,6 +6,10 @@ const nodemailer = require('nodemailer');
 const randomstring = require('randomstring');
 const { token } = require('morgan');
 const userModel = require('../model/schema');
+const categoryModel = require('../model/category');
+
+
+
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -14,7 +18,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 const login = (req, res) => {
-    res.render('login'); // Assuming 'login' is the directory and 'log' is the EJS file inside it
+    res.render('doctorlist'); // Assuming 'login' is the directory and 'log' is the EJS file inside it
 }
 
 
@@ -349,6 +353,21 @@ const loginpost = async (req, res) => {
 };
 
 
+
+const catagory = async (req, res) => {
+    try {
+        const data = await categoryModel.find();
+        console.log(data,'//////////////////')
+        res.render('catagory', { data: data }); 
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+};
+
+
+
+
 module.exports={
     login,
     signup,
@@ -364,5 +383,6 @@ module.exports={
     changePasswordPost,
     resetsuccess,
     home,
-    loginpost
+    loginpost,
+    catagory
 }

@@ -1,0 +1,445 @@
+<%- include('./partials/header.ejs')%>
+
+
+        <!-- Start Responsive Navbar Area -->
+        <div class="responsive-navbar offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
+            <div class="offcanvas-header">
+                <a href="index.html" class="logo d-inline-block">
+                    <img class="logo-light" src="/assets/img/logo.webp" alt="logo">
+                    <img class="logo-dark" src="/assets/img/logo-white.webp" alt="logo">
+                </a>
+                <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="accordion" id="navbarAccordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Home
+                        </button>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
+                            <div class="accordion-body">
+                                <div class="accordion" id="navbarAccordion2">
+                                    <div class="accordion-item">
+                                        <a class="accordion-link" href="index.html">
+                                            Home Demo One
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a class="accordion-link" href="index-2.html">
+                                            Home Demo Two
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a class="accordion-link" href="index-3.html">
+                                            Home Demo Three
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Dentists
+                        </button>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
+                            <div class="accordion-body">
+                                <div class="accordion" id="navbarAccordion30">
+                                    <div class="accordion-item">
+                                        <a href="dentists.html" class="accordion-link">
+                                            All Dentists
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="dentist-details.html" class="accordion-link">
+                                            Dentist Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Services
+                        </button>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
+                            <div class="accordion-body">
+                                <div class="accordion" id="navbarAccordion7">
+                                    <div class="accordion-item">
+                                        <a href="service-style-one.html" class="accordion-link active">
+                                            Service Style One
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="service-style-two.html" class="accordion-link">
+                                            Service Style Two
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="service-details.html" class="accordion-link">
+                                            Service Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapZigour" aria-expanded="false" aria-controls="collapZigour">
+                            Pages
+                        </button>
+                        <div id="collapZigour" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
+                            <div class="accordion-body">
+                                <div class="accordion" id="navbarAccordion45">
+                                    <div class="accordion-item">
+                                        <a class="accordion-link" href="about.html">
+                                            About Us
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="book-appointment.html" class="accordion-link">
+                                            Book Appointment
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="pricing-plan.html" class="accordion-link">
+                                            Pricing Plan
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="testimonials.html" class="accordion-link">
+                                            Testimonials
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="faq.html" class="accordion-link">
+                                            FAQ
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="privacy-policy.html" class="accordion-link">
+                                            Privacy Policy
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="terms-conditions.html" class="accordion-link">
+                                            Terms & Conditions
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <a href="error-404.html" class="accordion-link">
+                                            404 Error Page
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Blog
+                        </button>
+                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
+                            <div class="accordion-body">
+                                <div class="accordion" id="navbarAccordion5">
+                                    <div class="accordion-item">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne2" aria-expanded="false" aria-controls="collapseOne2">
+                                            Blog Layout
+                                        </button>
+                                        <div id="collapseOne2" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion3">
+                                            <div class="accordion-body">
+                                                <div class="accordion" id="navbarAccordion3">
+                                                    <div class="accordion-item">
+                                                        <a class="accordion-link" href="blog-no-sidebar.html">
+                                                            Blog Grid
+                                                        </a>
+                                                    </div>
+                                                    <div class="accordion-item">
+                                                        <a class="accordion-link" href="blog-left-sidebar.html">
+                                                            Blog Left Sidebar
+                                                        </a>
+                                                    </div>
+                                                    <div class="accordion-item">
+                                                        <a class="accordion-link" href="blog-right-sidebar.html">
+                                                            Blog Right Sidebar
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne3" aria-expanded="false" aria-controls="collapseOne3">
+                                            Single Blog Layout
+                                        </button>
+                                        <div id="collapseOne3" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion4">
+                                            <div class="accordion-body">
+                                                <div class="accordion" id="navbarAccordion4">
+                                                    <div class="accordion-item">
+                                                        <a class="accordion-link" href="blog-details-no-sidebar.html">
+                                                            Blog Details Without Sidebar
+                                                        </a>
+                                                    </div>
+                                                    <div class="accordion-item">
+                                                        <a class="accordion-link" href="blog-details-left-sidebar.html">
+                                                            Blog Details Left Sidebar 
+                                                        </a>
+                                                    </div>
+                                                    <div class="accordion-item">
+                                                        <a class="accordion-link" href="blog-details-right-sidebar.html">
+                                                            Blog Details Right Sidebar 
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <a class="accordion-button without-icon" href="contact.html">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+                <div class="offcanvas-contact-info">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info list-style">
+                        <li>
+                            <i class="flaticon-pin"></i>
+                            <p>No. 12, Ribon Building, Walse street, Australia</p>
+                        </li>
+                        <li>
+                            <i class="flaticon-mail"></i>
+                            <a href="https://templates.hibotheme.com/cdn-cgi/l/email-protection#a4ccc1c8c8cbe4c0cbc8d08ac7cbc9"><span class="__cf_email__" data-cfemail="422a272e2e2d02262d2e366c212d2f">[email&#160;protected]</span></a>
+                        </li>
+                        <li>
+                            <i class="flaticon-phone-call"></i>
+                            <a href="tel:968547856254">+968 547856 254</a>
+                        </li>
+                    </ul>
+                    <ul class="social-profile list-style">
+                        <li><a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a></li>
+                        <li><a href="https://www.instagram.com/" target="_blank"><i class="ri-instagram-line"></i></a></li>
+                        <li><a href="https://www.linkedin.com/" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
+                        <li><a href="https://www.twitter.com/" target="_blank"><i class="ri-twitter-fill"></i></a></li>
+                    </ul>
+                </div>
+                <div class="others-option d-lg-none">
+                    <div class="contact-item">
+                        <i class="flaticon-emergency-call"></i>
+                        <span>Phone Number</span>
+                        <a href="tel:968547856254">+968 547856 254</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Search Modal -->
+        <div class="modal fade searchModal" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                     <form>
+                        <input type="text" class="form-control" placeholder="Search here....">
+                        <button type="submit"><i class="ri-search-line"></i></button>
+                    </form>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="ri-close-fill"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- End Search Modal -->
+
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap bg-f br-2">
+            <img src="/assets/img/breadcrumb/br-shape-1.webp" alt="Image" class="br-shape-one bounce sm-none">
+            <img src="/assets/img/breadcrumb/br-shape-2.webp" alt="Image" class="br-shape-two moveHorizontal sm-none">
+            <img src="/assets/img/breadcrumb/br-shape-3.webp" alt="Image" class="br-shape-three">
+            <div class="container">
+                <div class="breadcrumb-content">
+                    <h2>CATAGORY</h2>
+                    <ul class="breadcrumb-menu list-style">
+                        <li><a href="index.html">Home</a></li>
+                        <li>Our Services</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+
+        <!-- Service Section Start -->
+        <div class="service-wrap ptb-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <% data.forEach((y) => { %>
+                        <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+                            <div class="service-card style-four">
+                                    <!-- Add your icon or image here -->
+                                </span>
+                                <h3><a href="service-details.html"><%= y.name %></a></h3>
+                                <p><%= y.description %></p>
+                                <a href="service-details.html" class="service-link"><i class="flaticon-right-arrow"></i></a>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+                <!-- <ul class="page-nav list-style text-center mt-20">
+                    <li><a href="service-style-one.html"><img src="assets/img/left-arrow-2.svg" alt="Image"></a></li>
+                    <li><a class="active" href="service-style-one.html">01</a></li>
+                    <li><a href="service-style-one.html">02</a></li>
+                    <li><a href="service-style-one.html">03</a></li>
+                    <li><a href="service-style-one.html"><img src="assets/img/right-arrow-2.svg" alt="Image"></a></li>
+                </ul> -->
+            </div>
+        </div>
+        
+        <!-- Service Section End -->
+
+        <!-- CTA Section Start -->
+        <!-- <div class="cta-wrap style-one">
+            <img src="/assets/img/cta-shape.webp" alt="Image" class="cta-shape">
+            <div class="container text-center">
+                <h4>Have Any Questions Feel Free to Contact with Our Team</h4>
+                <a class="cta-contact" href="tel:+1-123-456-7899">+1-123-456-7899<img src="/assets/img/section-shape-2.webp" alt="Image"></a>
+                <a href="contact.html" class="btn-two">Contact Us</a>
+            </div>
+        </div> -->
+        <!-- CTA Section End -->
+
+        <!-- Why Choose Us Section Start -->
+        <!-- <div class="wh-wrap style-one ptb-100">
+            <div class="container">
+                <img src="/assets/img/about/wh-shape-3.webp" alt="Image" class="wh-shape-one">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="wh-content">
+                            <div class="content-title style-one">
+                                <span><img src="/assets/img/section-shape.svg" alt="Image">Why Choose Us</span>
+                                <h2>We Are A Award-Winning & Certified <span>Hospital</span><img src="/assets/img/section-shape-2.webp" alt="Image"></h2>
+                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randos omised words which don't look even slightly believable.</p>
+                            </div>
+                            <ul class="feature-list list-style">
+                                <li>Mauris mattis lectus eget ligula</li>
+                                <li>Aenean facilisis erat et metus</li>
+                                <li>Aenean facilisis erat et metus</li>
+                                <li>Mauris mattis lectus eget ligula</li>
+                            </ul>
+                            <a href="tel:968547856254" class="btn-two"><i class="flaticon-phone-call"></i>+968 547856 254</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="wh-img-wrap">
+                            <div class="wh-img">
+                                <img src="/assets/img/about/wh-img-1.webp" alt="Image">
+                            </div>
+                            <div class="circle-wrap">
+                               <i class="flaticon-tooth-2"></i>
+                                <div class="circle-text">
+                                    <svg class="rotate" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
+                                        <defs>
+                                            <path id="circlePath_one" d=" M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 "/>
+                                        </defs>
+                                        <circle cx="150" cy="150" r="75" fill="none"/>
+                                        <g>
+                                            <use xlink:href="#circlePath_one" fill="none"/>
+                                            <text fill="#000A2D">
+                                                <textPath xlink:href="#circlePath_one">BEST  DENTAL  CAREWORLD</textPath>
+                                            </text>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Why Choose Us Section End -->
+        
+        <!-- Footer  Start -->
+        <!-- <footer class="footer-wrap">
+            <div class="footer-top  pt-100 pb-70">
+                <img src="/assets/img/footer-shape.webp" alt="Image" class="footer-shape">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-12 col-sm-6">
+                            <div class="footer-widget">
+                                <a href="index.html" class="footer-logo">
+                                    <img class="logo-light" src="/assets/img/logo-white.webp" alt="Image">
+                                    <img class="logo-dark" src="/assets/img/logo-white.webp" alt="Image">
+                                </a>
+                                <p class="comp-desc">There are many variations of passages ofor
+                                Ipsum available, but the majority have suffered
+                                alteration in some form by inject.</p>
+                                <div class="contact-info">
+                                    <h6><i class="flaticon-pin"></i>Contact Address</h6>
+                                    <p>64C East Crest, Melane Plaza,DanyBoyle, TT 3346, USA</p>
+                                </div>
+                                <ul class="social-profile list-style">
+                                    <li><a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a></li>
+                                    <li><a href="https://www.twitter.com/" target="_blank"><i class="ri-twitter-fill"></i></a></li>
+                                    <li><a href="https://www.instagram.com/" target="_blank"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-5 col-lg-6 col-md-12 col-sm-6 pe-xxl-6">
+                            <div class="footer-widget">
+                                <h3 class="footer-widget-title">Quick Links</h3>
+                                <ul class="footer-menu list-style">
+                                    <li><a href="service-style-one.html"><i class="ri-arrow-right-double-line"></i>Hospital</a></li>
+                                    <li><a href="about.html"><i class="ri-arrow-right-double-line"></i>About Us</a></li>
+                                    <li><a href="service-style-one.html"><i class="ri-arrow-right-double-line"></i>Services</a></li>
+                                    <li><a href="service-details.html"><i class="ri-arrow-right-double-line"></i>Portfolio</a></li>
+                                    <li><a href="contact.html"><i class="ri-arrow-right-double-line"></i>Contact Us</a></li>
+                                    <li><a href="service-details.html"><i class="ri-arrow-right-double-line"></i>Dental Implants</a></li>
+                                    <li><a href="book-appointment.html"><i class="ri-arrow-right-double-line"></i>Make An Appointment</a></li>
+                                    <li><a href="faq.html"><i class="ri-arrow-right-double-line"></i>Faq</a></li>
+                                    <li><a href="pricing-plan.html"><i class="ri-arrow-right-double-line"></i>Pricing</a></li>
+                                    <li><a href="privacy-policy.html"><i class="ri-arrow-right-double-line"></i>Privacy Policy</a></li>
+                                    <li><a href="terms-conditions.html"><i class="ri-arrow-right-double-line"></i>Terms & Condition</a></li>
+                                    <li><a href="service-style-one.html"><i class="ri-arrow-right-double-line"></i>Cleaning Facilities</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-12 col-sm-6 px-xxl-0">
+                            <div class="footer-widget">
+                                <h3 class="footer-widget-title">Clinic Hours</h3>
+                                <ul class="opening-time list-style">
+                                    <li><span>Mon - Thu</span> <span>9:00 AM - 7:00 PM</span></li>
+                                    <li><span>Friday - </span> <span>9:00 AM - 6:00 PM</span></li>
+                                    <li><span>Saturday -</span> <span>Closed</span></li>
+                                    <li><span>Sunday -</span> <span>Closed</span></li>
+                                </ul>
+                                <div class="contact-info">
+                                    <h6><i class="flaticon-phone-call"></i>Call Us</h6>
+                                    <a href="tel:08811234567899">(088)  +1-123-456-7899</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="copyright-text"><i class="ri-copyright-line"></i><span>Dolt</span> is proudly owned by <a href="https://hibotheme.com/">HiboTheme</a></p>
+        </footer> -->
+        <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <button type="button" id="backtotop" class="position-fixed text-center border-0 p-0">
+            <i class="ri-arrow-up-line"></i>
+        </button>
+
+        <!-- Link of JS files -->
+        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/swiper.bundle.min.js"></script>
+        <script src="/assets/js/aos.js"></script>
+        <script src="/assets/js/fslightbox.js"></script>
+        <script src="/assets/js/main.js"></script>
+    </body>
+
+<!-- Mirrored from templates.hibotheme.com/dolt/default/service-style-one.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 May 2024 05:55:22 GMT -->
+</html>

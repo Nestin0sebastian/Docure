@@ -16,6 +16,8 @@ router.get('/passwordreset',user.resetPassword)
 router.post('/resetsuccess',user.resetsuccess)
 router.get('/',user.home)
 router.post('/loginpost',user.loginpost)
+router.get('/catagorydisplay',user.catagory)
+
 
 
 

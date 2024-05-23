@@ -101,25 +101,25 @@
     }
 
     </style>
+      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   </head>
 
-    <body>
-      <div class="inner-layer">
-          <div class="container">
+  <body>
+    <div class="inner-layer">
+        <div class="container">
             <div class="row no-margin">
                 <div class="col-sm-7">
                     <div class="content">
                         <h1>"Reserve your slot now and, </h1>
                         <h1>reclaim your time! </h1>
-
                     </div>
                 </div>
                 <div class="col-sm-5">
                     <div class="form-data">
                         <div class="form-head">
-                            <h2 class="book-appointment">Schedule    Your  Appointment   !</h2>
+                            <h2 class="book-appointment">Schedule Your Appointment !</h2>
                         </div>
-                        <form action="/proceedToPay" method="POST">
+                        <form id="appointmentForm">
                             <div class="form-body">
                                 <div class="row form-row">
                                     <input type="text" name="fullName" placeholder="Enter Full name" class="form-control">
@@ -131,53 +131,100 @@
                                     <input type="text" name="email" placeholder="Enter Email Address" class="form-control">
                                 </div>
                                 <p>Select date and time slot:</p>
-                        
                                 <div class="row form-row">
                                     <input type="date" name="appointmentDate" placeholder="Appointment Date" class="form-control">
                                 </div>
-                                <input type="hidden" id="selectedTimeSlot" name="timeSlot"> <!-- Hidden input field to store the selected time slot -->
+                                <input type="hidden" id="selectedTimeSlot" name="timeSlot">
 
                                 <div class="row form-row">
                                     <div class="time-slots">
                                         <button type="button" class="time-slot" onclick="setTimeSlot('10:00 AM')">10:00 AM</button>
                                         <button type="button" class="time-slot" onclick="setTimeSlot('11:00 AM')">11:00 AM</button>
                                         <button type="button" class="time-slot" onclick="setTimeSlot('12:00 PM')">12:00 PM</button>
-                                        <button type="button" class="time-slot" onclick="setTimeSlot('1:00 AM')">1:00 PM</button>
-                                        <button type="button" class="time-slot" onclick="setTimeSlot('2:00 AM')">2:00 PM</button>
+                                        <button type="button" class="time-slot" onclick="setTimeSlot('1:00 PM')">1:00 PM</button>
+                                        <button type="button" class="time-slot" onclick="setTimeSlot('2:00 PM')">2:00 PM</button>
                                         <button type="button" class="time-slot" onclick="setTimeSlot('3:00 PM')">3:00 PM</button>
-                                        <button type="button" class="time-slot" onclick="setTimeSlot('4:00 AM')">4:00 PM</button>
-                                        <button type="button" class="time-slot" onclick="setTimeSlot('5:00 AM')">5:00 PM</button>
+                                        <button type="button" class="time-slot" onclick="setTimeSlot('4:00 PM')">4:00 PM</button>
+                                        <button type="button" class="time-slot" onclick="setTimeSlot('5:00 PM')">5:00 PM</button>
                                         <button type="button" class="time-slot" onclick="setTimeSlot('6:00 PM')">6:00 PM</button>
-                                        
-                                        
-                                        <!-- Add onclick event handlers for other time slots -->
                                     </div>
                                 </div>
-                                </div>
                             </div>
-                        
+
                             <p class="appointment-text">Booking appointment for <span class="doctor-name"><%= name %></span> (<span class="department"><%= category %></span>)</p>
-                        
+
                             <div class="row form-row">
-                                <button type="submit" class="btn btn-success btn-appointment">
-                                    Proceed to pay ₹<%= fee %>
-                                </button>
+                                <button type="button" class="btn btn-success btn-appointment" name="fee"onclick="proceedToPay()">Proceed to pay ₹<%= fee %></button>
                             </div>
                         </form>
-                        
                     </div>
                 </div>
             </div>
-          </div>
-      </div>
-      <script>
-        function setTimeSlot(slot) {
-            document.getElementById('selectedTimeSlot').value = slot;
+        </div>
+    </div>
+
+    <script>
+        function setTimeSlot(timeSlot) {
+            document.getElementById('selectedTimeSlot').value = timeSlot;
+        }
+
+        async function proceedToPay() {
+            const form = document.getElementById('appointmentForm');
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/proceedToPay', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const { order_id, amount, currency, key } = await response.json();
+
+            const options = {
+                key,
+                amount,
+                currency,
+                name: "Your Company Name",
+                description: "Appointment Booking",
+                order_id,
+                handler: function (response) {
+                    verifyPayment(response);
+                },
+                prefill: {
+                    name: data.fullName,
+                    email: data.email,
+                    contact: data.mobileNumber
+                },
+                theme: {
+                    color: "#F37254"
+                }
+            };
+
+            const rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+
+        async function verifyPayment(response) {
+            const verificationResponse = await fetch('/verify-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(response)
+            });
+
+            const result = await verificationResponse.json();
+            if (result.status === 'success') {
+                window.location.href = '/home';
+            } else {
+                alert('Payment verification failed. Please try again.');
+            }
         }
     </script>
-    
-      
-    </body>
+</body>
   
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

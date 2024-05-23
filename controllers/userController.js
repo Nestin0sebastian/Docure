@@ -9,11 +9,13 @@ const userModel = require('../model/schema');
 const categoryModel = require('../model/category');
 const doctorModel = require('../model/doctorschema');
 const appointmentModel = require('../model/appointment');
-// const Razorpay = require('razorpay');
-// const razorpay = new Razorpay({
-//     key_id: process.env.key_id,
-//     key_secret: process.env.Secret_key
-// });
+const crypto = require('crypto');
+
+const Razorpay = require('razorpay');
+const razorpay = new Razorpay({
+    key_id: process.env.key_id,
+    key_secret: process.env.Secret_key
+});
 
 const geocoder = require('node-geocoder'); // Assuming 'geocoder' is the correct module name
 const fetch = require('node-fetch');
@@ -466,23 +468,57 @@ const appointmentget = (req, res) => {
     res.render('appointment', { category, name, fee });
 }
 
-const proceedToPay = (req, res) => {
-    // Assuming form fields are named "fullName", "mobileNumber", "email", "appointmentDate", and "timeSlot"
 
-    // Store form data directly in the session
+
+const proceedToPay= async (req, res) => {
     req.session.appointmentDetails = {
         fullName: req.body.fullName,
         mobileNumber: req.body.mobileNumber,
         email: req.body.email,
         appointmentDate: req.body.appointmentDate,
-        timeSlot: req.body.timeSlot
+        timeSlot: req.body.timeSlot,
+        fee: 500// Set the fee dynamically as per your requirement
     };
 
+    const payment_capture = 1;
+    const amount = req.session.appointmentDetails.fee * 100; // amount in the smallest currency unit (paise)
+    const currency = 'INR';
 
-    
+    const options = {
+        amount,
+        currency,
+        receipt: `receipt_${Date.now()}`,
+        payment_capture
+    };
 
-    // Redirect or send response as needed
-console.log('0000',req.session.appointmentDetails,'llll')};
+    try {
+        const order = await razorpay.orders.create(options);
+        req.session.order_id = order.id;
+        res.json({ order_id: order.id, amount: amount, currency: currency, key: process.env.KEY_ID });
+    } catch (error) {
+        res.status(500).send('Error creating order');
+    }
+}
+
+
+
+
+const verifypayment= (req, res) => {
+    const { order_id, payment_id, signature } = req.body;
+
+    const body = order_id + "|" + payment_id;
+    const expectedSignature = crypto.createHmac('sha256', process.env.SECRET_KEY)
+                                    .update(body.toString())
+                                    .digest('hex');
+
+    if (expectedSignature === signature) {
+        // Payment successful
+        res.render('login')
+    } else {
+        res.status(400).json({ status: 'failure' });
+    }
+}
+
 
 
 
@@ -506,5 +542,6 @@ module.exports={
     doctorslist,
     findDoctorsNearPlace,
     appointmentget,
-    proceedToPay
+    proceedToPay,
+    verifypayment
 }

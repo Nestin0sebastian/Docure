@@ -21,6 +21,8 @@ router.get('/doctorslist/:category',user.doctorslist)
 router.get('/findDoctorsNearPlace', user.findDoctorsNearPlace);
 router.get('/appointmentget',user.appointmentget)
 router.post('/proceedToPay',user.proceedToPay)
+router.post('/verifypayment',user.verifypayment)
+
 
 
 

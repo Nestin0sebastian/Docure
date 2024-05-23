@@ -23,16 +23,24 @@ const doctorSchema = new Schema({
         required: true
     },
     place: {
-        type: String, // Assuming place is a string (e.g., city or hospital name)
+        type: String,
         required: true
     },
     Time: {
-        type: String, // Assuming time is a string representing time slots
+        type: String,
         required: true
     },
     islist: {
         type: Boolean,
         default: false
+    },
+    latitude: {
+        type: Number,
+        required: true
+    },
+    longitude: {
+        type: Number,
+        required: true
     }
 });
 

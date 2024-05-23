@@ -17,6 +17,10 @@ router.post('/resetsuccess',user.resetsuccess)
 router.get('/',user.home)
 router.post('/loginpost',user.loginpost)
 router.get('/catagorydisplay',user.catagory)
+router.get('/doctorslist/:category',user.doctorslist)
+router.get('/findDoctorsNearPlace', user.findDoctorsNearPlace);
+router.get('/appointmentget',user.appointmentget)
+router.post('/proceedToPay',user.proceedToPay)
 
 
 

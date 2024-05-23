@@ -16,126 +16,192 @@
     <!-- Template CSS -->
     <link href="/assetsb/css/main.css" rel="stylesheet" type="text/css" />
     <style>
-        
         body, html {
-    background-color: #000000; /* Set the main background to black */
-    color: #cfd8dc; /* Adjust text color for readability on dark background */
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100%;
+            background-color: #000000; /* Set the main background to black */
+            color: #cfd8dc; /* Adjust text color for readability on dark background */
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1e1e2f; /* Additional container background color for contrast */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #ffffff; /* Set header text color to white */
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+
+        .content-main {
+            background-color: #1e1e2f; /* Ensure the content main area is black */
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .content-main .row.align-items-center {
+            background: linear-gradient(135deg, #34526f 0%, #5a245d 100%);
+            padding: 10px;
+            border-bottom: 1px solid #39495a;
+            font-weight: bold;
+            color: #ffffff; /* Ensure text color is white */
+            border-radius: 5px;
+        }
+
+        .itemlist {
+            margin-bottom: 20px;
+            border: 1px solid #39495a;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #2a2a3b; /* Set itemlist background to a dark gray */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .itemlist:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .itemlist img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .card {
     width: 100%;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #1e1e2f; /* Additional container background color for contrast */
+        .itemlist h6 {
+            color: #ffffff; /* Set item title color to white */
+            margin-bottom: 5px;
+        }
+
+        .itemlist .text-muted {
+            color: #b0bec5; /* Adjust muted text color for readability */
+            margin-bottom: 5px;
+        }
+
+        .itemlist .col-fee {
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .itemlist .col-place {
+            color: #000000;
+            font-size: 16px;
+        }
+
+        .itemlist .col-time {
+            color: #c4a646;
+            font-size: 16px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px 0;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-brand {
+            background-color: #a37201;
+            color: #ffffff; /* Ensure button text color is white */
+        }
+
+        .btn-brand:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .btn-light {
+            background-color: #bdc3c7;
+            color: #2c3e50;
+            border: 1px solid #7f8c8d;
+        }
+        .card {
+    border: none;
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 30px;
+        .btn-light:hover {
+            background-color: #000000;
+            color: #ecf0f1;
+            transform: scale(1.05);
+        }
+ 
+    .white-text {
+        color: rgb(255, 255, 255);
+    }
+
+    .card-body {
+    background-color: #000000;
+    padding: 1rem;
 }
 
-.header h1 {
-    color: #ffffff; /* Set header text color to white */
-    font-size: 2.5em;
-    font-weight: 300;
-}
-
-.content-main {
-    background-color: #1e1e2f; /* Ensure the content main area is black */
-    padding: 20px;
-    border-radius: 5px;
-}
-
-.content-main .row.align-items-center {
-    background: linear-gradient(135deg, #34526f 0%, #132427 100%);
-    padding: 10px;
-    border-bottom: 1px solid #39495a;
+.card-header {
+    font-size: 1.25rem;
     font-weight: bold;
-    color: #ffffff; /* Ensure text color is white */
-    border-radius: 5px;
+    text-align: center;
 }
 
-.itemlist {
-    margin-bottom: 20px;
-    border: 1px solid #39495a;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #2a2a3b; /* Set itemlist background to a dark gray */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.card {
+    margin-bottom: 1rem;
 }
 
-.itemlist:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-}
-
-.itemlist img {
+.img-fluid {
     max-width: 100%;
-    border-radius: 5px;
+    height: auto;
 }
 
-.itemlist h6 {
-    color: #ffffff; /* Set item title color to white */
-    margin-bottom: 5px;
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: rgb(255, 255, 255); /* Set color to white */
 }
 
-.itemlist .text-muted {
-    color: #b0bec5; /* Adjust muted text color for readability */
-    margin-bottom: 5px;
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #343a40;
 }
 
-.itemlist .col-fee {
-    color: #ffffff;
-    font-size: 18px;
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
-.itemlist .col-place {
-    color: #9e76ad;
-    font-size: 16px;
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
 }
 
-.itemlist .col-time {
-    color: #c4a646;
-    font-size: 16px;
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
-
-.btn {
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    margin: 5px 0;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+.card-text {
+    font-size: 0.9rem; /* Smaller font size */
+    margin-bottom: 0.5rem;
+    color: #e4e4e4;
+    line-height: 1.5; /* Adjust line height for better readability */
+    font-family: 'Roboto', sans-serif; /* Specify a specific font family for a more attractive style */
 }
-
-.btn-brand {
-    background-color: #3498db;
-    color: #ffffff; /* Ensure button text color is white */
-}
-
-.btn-brand:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
-}
-
-.btn-light {
-    background-color: #bdc3c7;
-    color: #2c3e50;
-    border: 1px solid #7f8c8d;
-}
-
-.btn-light:hover {
-    background-color: #7f8c8d;
-    color: #ecf0f1;
-    transform: scale(1.05);
-}
+  
+</style>
 
 
     </style>
@@ -149,49 +215,86 @@
     <section class="content-main">
         <div class="container">
             <div class="header">
-                <div class="header">
-                    <h1><b>Doctors List</b></h1>
+                <h1><b>Doctors List</b></h1>
+            </div>
+            <div class="content-header">
+                <select id="categorySelect" class="form-select" style="display:none; color: white;">
+                    <% doctors.forEach(function(doctor) { %>
+                        <option value="<%= doctor.category.name %>"><%= doctor.category.name %></option>
+                    <% }); %>
+                </select>
+                <div style="display: flex;">
+                    <input type="text" id="searchPlace" placeholder="Enter a place" class="form-control" style="color: white; margin-right: 10px;">
+                    <button class="btn btn-brand" onclick="searchByPlace()" style="background-color: #ff6347; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px;">FIND</button>
                 </div>
                             </div>
-            <div class="content-header"></div>
             
-            <div class="card-body">
-                <% for (let i = 0; i < 5; i++) { %>
-                    <article class="itemlist">
-                        <div class="row align-items-center">
-                            <div class="col col-check flex-grow-0">
-                                <!-- Optional checkbox or any other element -->
+            <script>
+                function searchByPlace() {
+                    const place = document.getElementById('searchPlace').value;
+                    const categorySelect = document.getElementById('categorySelect');
+                    const category = categorySelect.value;
+            
+                    fetch(`/findDoctorsNearPlace?place=${encodeURIComponent(place)}&category=${encodeURIComponent(category)}`, {
+                        method: 'GET',
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text(); // Parse response as text
+                    })
+                    .then(html => {
+                        document.body.innerHTML = html; // Replace current body with new HTML
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            </script>
+            
+            
+            
+            
+
+           <div class="container mt-5">
+    <div class="card">
+       
+        <div class="card-body" id="doctor-list">
+            <% doctors.forEach(function(doctor) { %>
+                <div class="card mb-3 ">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            <img src="<%= doctor.DoctorImage %>" alt="Doctor Image" class="img-fluid rounded-start">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: white;"><%= doctor.DoctorName %></h5>
+                                <p class="card-text">
+                                    <strong>Specialty:</strong> <%= doctor.category.name %><br>
+                                    <strong>Experience:</strong> <%= doctor.Experience %> Years<br>
+                                    <strong>Location:</strong> <%= doctor.place %><br>
+                                    <strong>Fee:</strong> ₹<%= doctor.Fee %>/-
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-muted"><%= doctor.Time %></span>
+<!-- Replace this part with your dynamic HTML template rendering system (e.g., EJS) -->
+<a href="/appointmentget?name=<%= doctor.DoctorName %>&category=<%= doctor.category.name %>&fee=<%= doctor.Fee %>" class="btn btn-primary">Book Appointment</a>
+                                </div>
                             </div>
-                            <div class="col-lg-2 col-sm-2 col-4">
-                                <img src="https://via.placeholder.com/100" alt="Doctor Image" class="img-thumbnail">
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-8 flex-grow-1">
-                                <a class="itemside" href="#">
-                                    <div class="info">
-                                        <h6 class="mb-0">Doctor <%= i + 1 %></h6>
-                                        <p class="text-muted mb-0">Specialty <%= i + 1 %></p>
-                                        <p><%= 5 + i %> Years of Experience</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-1 col-sm-1 col-4">
-                                <span class="col-fee">₹<%= 500 + (i * 100) %>/-</span>
-                            </div>
-                            <div class="col-lg-2 col-sm-2 col-4">
-                                <span class="col-place">Place <%= i + 1 %></span>
-                            </div>
-                            <div class="col-lg-2 col-sm-2 col-4">
-                                <span class="col-time"><%= 9 + i %>:00 AM to <%= 5 + i %>:00 PM</span>
-                            </div>
-                            <div class="col-lg-2 col-sm-2 col-4 text-end">
-                                <a href="#" class="btn btn-brand">Book Appointment</a>
-                            </div>
-                        </div> <!-- row .// -->
-                    </article> <!-- itemlist  .// -->
-                <% } %>
-            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+
         </div>
     </section>
+ 
+    
+    
 
     <script src="/assetsb/js/vendors/jquery-3.6.0.min.js"></script>
     <script src="/assetsb/js/vendors/bootstrap.bundle.min.js"></script>
@@ -200,5 +303,79 @@
     <script src="/assetsb/js/vendors/jquery.fullscreen.min.js"></script>
     <!-- Main Script -->
     <script src="/assetsb/js/main.js" type="text/javascript"></script>
+
+    <script>
+        function findNearbyDoctors() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const { latitude, longitude } = position.coords;
+                    const maxDistance = 5; // Maximum distance in kilometers
+
+                    fetch(`/nearby-doctors?latitude=${latitude}&longitude=${longitude}&maxDistance=${maxDistance}`)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById('doctor-list').innerHTML = data;
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+   
+
+function successCallback(position) {
+    // Extract latitude and longitude from the position object
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    // Send latitude and longitude to the server
+    const location = { latitude, longitude };
+    alert(location)
+    fetch('/findnearby', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ location })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch nearby doctors');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Display the list of nearby doctors returned from the server
+        console.log(data);
+        // You can update the UI to display the list of nearby doctors
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+
+function errorCallback(error) {
+    // Handle errors when getting the user's location
+    console.error('Error getting user location:', error);
+}
+
+    </script>
+
+    
 </body>
+
 </html>

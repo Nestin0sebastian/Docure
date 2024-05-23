@@ -133,6 +133,8 @@ const addoctor = async (req, res) => {
 };
 
 
+const axios = require('axios');
+
 const addoctorpost = async (req, res) => {
   try {
       console.log(req.file);
@@ -148,6 +150,18 @@ const addoctorpost = async (req, res) => {
           return res.status(400).send('Category not found');
       }
 
+      // Fetch latitude and longitude for the place using OpenCage API
+      const apiKey = 'b95841023bec4424aa162ef49b6b2113';
+      const geocodeUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(place)}&key=${apiKey}`;
+
+      const geocodeResponse = await axios.get(geocodeUrl);
+
+      if (!geocodeResponse.data.results.length) {
+          return res.status(400).send('Invalid place');
+      }
+
+      const { lat, lng } = geocodeResponse.data.results[0].geometry;
+
       const newDoctor = {
           DoctorName: doctor_name,
           category: category._id,
@@ -155,7 +169,9 @@ const addoctorpost = async (req, res) => {
           Fee: fee,
           place: place,
           Time: `${time_schedule_start} to ${time_schedule_end}`,
-          DoctorImage: doctor_image
+          DoctorImage: doctor_image,
+          latitude: lat,
+          longitude: lng
       };
 
       console.log(newDoctor);
@@ -169,6 +185,9 @@ const addoctorpost = async (req, res) => {
       res.status(500).send('Internal Server Error');
   }
 };
+
+
+
 const doctorlist = async (req, res) => {
   try {
     const doctors = await doctorModel.find().populate('category'); // Populate category if it's a reference

@@ -79,7 +79,7 @@
                                         </a>
                                     </div>
                                     <div class="accordion-item">
-                                        <a href="service-details.html" class="accordion-link">
+                                        <a href="/doctorslist" class="accordion-link">
                                             Service Details
                                         </a>
                                     </div>
@@ -280,9 +280,9 @@
                             <div class="service-card style-four">
                                     <!-- Add your icon or image here -->
                                 </span>
-                                <h3><a href="service-details.html"><%= y.name %></a></h3>
+                                <h3><%= y.name %></a></h3>
                                 <p><%= y.description %></p>
-                                <a href="service-details.html" class="service-link"><i class="flaticon-right-arrow"></i></a>
+                                <a href="/doctorslist/<%= y.name%>" class="service-link"><i class="flaticon-right-arrow"></i></a>
                             </div>
                         </div>
                     <% }); %>

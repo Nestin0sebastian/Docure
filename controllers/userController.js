@@ -7,8 +7,16 @@ const randomstring = require('randomstring');
 const { token } = require('morgan');
 const userModel = require('../model/schema');
 const categoryModel = require('../model/category');
+const doctorModel = require('../model/doctorschema');
+const appointmentModel = require('../model/appointment');
+// const Razorpay = require('razorpay');
+// const razorpay = new Razorpay({
+//     key_id: process.env.key_id,
+//     key_secret: process.env.Secret_key
+// });
 
-
+const geocoder = require('node-geocoder'); // Assuming 'geocoder' is the correct module name
+const fetch = require('node-fetch');
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -18,7 +26,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 const login = (req, res) => {
-    res.render('doctorlist'); // Assuming 'login' is the directory and 'log' is the EJS file inside it
+    res.render('login'); // Assuming 'login' is the directory and 'log' is the EJS file inside it
 }
 
 
@@ -366,6 +374,116 @@ const catagory = async (req, res) => {
 };
 
 
+const doctorslist = async (req, res) => {
+    const categoryName = req.params.category;
+    console.log(categoryName, '}{}{}{}{}}{{{{{{{{{{{{{{{');
+
+    try {
+        // Find the category document by name
+        const category = await categoryModel.findOne({ name: categoryName });
+
+        if (!category) {
+            return res.status(404).send('Category not found');
+        }
+
+        // Find doctors by the category's ObjectId
+        const doctors = await doctorModel.find({ category: category._id }).populate('category');
+
+        console.log(doctors, 'lllllllllllllllllllllllllll');
+        res.render('doctorlist', { doctors });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const findDoctorsNearPlace = async (req, res) => {
+    try {
+        const { place, category } = req.query;
+        console.log('Received place:', place);
+        console.log('Received category:', category);
+
+        if (!place) {
+            return res.status(400).json({ error: 'Please provide a place name' });
+        }
+
+        if (!category) {
+            return res.status(400).json({ error: 'Please provide a category' });
+        }
+
+        const foundCategory = await categoryModel.findOne({ name: category });
+        if (!foundCategory) {
+            return res.status(404).json({ error: 'Category not found' });
+        }
+
+        const doctors = await doctorModel.find({ category: foundCategory._id }).populate('category');
+        console.log('Found doctors:', doctors);
+
+        const geocodingUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(place)}`;
+        const response = await fetch(geocodingUrl);
+        const geocodingData = await response.json();
+        if (!geocodingData.results || geocodingData.results.length === 0) {
+            return res.status(400).json({ error: 'Failed to find location coordinates for the provided place' });
+        }
+
+        const location = geocodingData.results[0];
+        const latitude = location.latitude;
+        const longitude = location.longitude;
+
+        doctors.forEach(doctor => {
+            const doctorLatitude = doctor.latitude;
+            const doctorLongitude = doctor.longitude;
+            doctor.distance = calculateDistance(latitude, longitude, doctorLatitude, doctorLongitude);
+        });
+
+        doctors.sort((a, b) => a.distance - b.distance);
+
+        console.log('Sorted doctors by distance:', doctors);
+
+        res.render('doctorlist', { doctors });
+
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+const appointmentget = (req, res) => {
+    const category = req.query.category; // Retrieve category from query string
+    const name = req.query.name; // Retrieve name from query string
+    const fee = req.query.fee; // Retrieve fee from query string
+    console.log('llll', category, name, fee, 'lllll');
+    res.render('appointment', { category, name, fee });
+}
+
+const proceedToPay = (req, res) => {
+    // Assuming form fields are named "fullName", "mobileNumber", "email", "appointmentDate", and "timeSlot"
+
+    // Store form data directly in the session
+    req.session.appointmentDetails = {
+        fullName: req.body.fullName,
+        mobileNumber: req.body.mobileNumber,
+        email: req.body.email,
+        appointmentDate: req.body.appointmentDate,
+        timeSlot: req.body.timeSlot
+    };
+
+
+    
+
+    // Redirect or send response as needed
+console.log('0000',req.session.appointmentDetails,'llll')};
+
 
 
 module.exports={
@@ -384,5 +502,9 @@ module.exports={
     resetsuccess,
     home,
     loginpost,
-    catagory
+    catagory,
+    doctorslist,
+    findDoctorsNearPlace,
+    appointmentget,
+    proceedToPay
 }

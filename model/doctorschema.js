@@ -17,6 +17,10 @@ const doctorSchema = new Schema({
     Experience: {
         type: String,
         required: true
+    },clinic:{
+        type:String,
+        reqired:true
+        
     },
     Fee: {
         type: Number,

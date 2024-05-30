@@ -8,69 +8,110 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- Your custom CSS can go here if needed -->
-    <link rel="stylesheet" href="/stylesheets/login.css">
     <style>
+        @keyframes glowFade {
+            0% {
+                color: #23db2a; /* Start with green glow */
+                text-shadow: 0 0 10px #00ff08; /* Add shadow to create glow effect */
+            }
+            50% {
+                color: #3c3939; /* Fade to white */
+                text-shadow: none; /* Remove shadow */
+            }
+            100% {
+                color: #00ff08; /* Return to green */
+                text-shadow: 0 0 10px #000000; /* Add shadow again */
+            }
+        }
 
-        
+        #companyName {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 20px;
+            animation: glowFade 3s infinite; /* Apply the glowFade animation */
+        }
+
+        #bgg {
+            background-color: #121212;
+        }
+
+        .card {
+            background-color: #1f1f1f;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            background-color: #212121;
+            border-bottom: none;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            padding: 20px;
+        }
+
+        .form-control {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #555;
+        }
+
+        .form-control:focus {
+            border-color: #aaa;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background-color: #4caf50;
+            border-color: #4caf50;
+        }
+
+        .btn-primary:hover {
+            background-color: #388e3c;
+            border-color: #388e3c;
+        }
+
+        .btn-link {
+            color: #4caf50;
+        }
     </style>
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
 </head>
-<body>
+<body id="bgg">
 
-<!-- Your existing HTML code here -->
-<div id="bodymain">
-    <section class="vh-100" id="bgg">
-        <div class="container py-5 h-100">
-          
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-
-              <div class="card shadow-2-strong bg-dark text-white" style="border-radius: 1rem;">
-
-                <div class="card-body p-5 text-center">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 animated">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-white mb-0">Login</h3>
+                </div>
+                <div class="card-body">
                     <form action="/loginpost" method="post">
-                        <div class="form-outline mb-4">
-                            <input type="email" id="contact-email" class="form-control form-control-lg" onkeyup="validatEmail()" name="email" />
-                            <label class="form-label" for="typeEmailX-2">Email</label>
-                            <span id="email-error"></span>
+                        <div class="form-group">
+                            <label for="email" class="text-white">Email</label>
+                            <input type="email" id="email" class="form-control" name="email">
                         </div>
-            
-                        <div class="form-outline mb-4">
-                            <input type="password" id="password" class="form-control form-control-lg" onkeyup="validatpass()" name="password" />
-                            <label class="form-label" for="typePasswordX-2">Password</label>
-                            <span id="password-error"></span>
+                        <div class="form-group">
+                            <label for="password" class="text-white">Password</label>
+                            <input type="password" id="password" class="form-control" name="password">
                         </div>
-            
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit" onclick="return validForm()">Login</button>
-                        <span id="submit-error"></span>
-            
-                        <hr class="my-4">
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </form>
-                    <div style="display: flex; justify-content: space-between;">
-                        <h6><a href="/signup" class="text-white">Create account?</a></h6>
-                        <p><a href="/forgotpassword" class="text-white" style="font-size: 11px;">Forgot password?</a></p>
-
+                    <div class="text-center mt-3">
+                        <a href="/signup" class="btn btn-link">Create Account</a>
+                        <span class="text-white mx-2">|</span>
+                        <a href="/forgotpassword" class="btn btn-link">Forgot Password</a>
                     </div>
-                    
                 </div>
             </div>
-            
-            </div>
-          </div>
-          <p style="color: hsl(0, 0%, 100%); font-family: 'Pacifico', cursive; font-size: 24px; text-shadow: 2px 2px 4px rgba(39, 145, 116, 0.695); letter-spacing: 2px; text-align: center; margin-top: -28px;">
-            Join us in creating smiles that last a lifetime.
-        </p>
-        
-        
-        
+            <!-- Add the company name with the specified ID -->
+            <h2 id="companyName">Dolt Consultations<p style="color: white;">Ltd.</p></h2>
         </div>
-      </section>
+    </div>
 </div>
 
 <!-- Add Bootstrap JS and jQuery (optional) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="/javascripts/log.js"></script>
 </body>
 </html>

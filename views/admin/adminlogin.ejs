@@ -1,34 +1,134 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - www.codingnepalweb.com -->
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glassmorphism Login Form | CodingNepal</title>
-  <link rel="stylesheet" href="/stylesheets/adminlogin.css">
+  <title>Glassmorphism Login Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: 360px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .wrapper h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+      font-size: 28px;
+    }
+
+    .input-field {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      color: #fff;
+      font-size: 16px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .input-field input:focus {
+      background: rgba(255, 255, 255, 0.2);
+      color: #333;
+    }
+
+    .input-field label {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      color: #fff;
+      pointer-events: none;
+      transition: top 0.3s, font-size 0.3s;
+    }
+
+    .input-field input:focus ~ label,
+    .input-field input:not(:placeholder-shown) ~ label {
+      top: 10px;
+      font-size: 14px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px 20px;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .register {
+      text-align: center;
+    }
+
+    .register a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .register a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <div class="wrapper">
+    <h2>Admin Login</h2>
     <form action="/admin/loginpost" method="post">
-      <h2> Admin Login</h2>
-        <div class="input-field">
-        <input type="text"  name="email" value="nestin@gmail.com"   required>
-        <label>Enter your email</label>
+      <div class="input-field">
+        <input type="text" name="email" required>
+        <label>Email</label>
       </div>
       <div class="input-field">
-        <input type="password"  name="password"   value="Nestin@123" required>
-        <label>Enter your password</label>
+        <input type="password" name="password" required>
+        <label>Password</label>
       </div>
-      <div class="forget">
-        <label for="remember">
-          <!-- <input type="checkbox" id="remember"> -->
-          
-        </label>
-        
-      </div>
-      <button type="submit">Log In</button>
+      <button type="submit"><i class="fas fa-sign-in-alt"></i> Log In</button>
       <div class="register">
-        <!-- <p>Don't have an account? <a href="#">Register</a></p> -->
+        <!-- Add registration link here if needed -->
       </div>
     </form>
   </div>

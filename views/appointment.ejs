@@ -82,7 +82,7 @@
 }
 
 .doctor-name {
-    color: #30bc5a; /* Change the color to your preference */
+    color: #056420; /* Change the color to your preference */
     font-style: italic;
 }
 
@@ -124,6 +124,10 @@
                                 <div class="row form-row">
                                     <input type="text" name="fullName" placeholder="Enter Full name" class="form-control">
                                 </div>
+                                <div class="row form-row" style="display: none;">
+                                    <input type="text" name="fee" value="<%= fee %>" class="form-control">
+                                </div>
+                                
                                 <div class="row form-row">
                                     <input type="text" name="mobileNumber" placeholder="Enter Mobile Number" class="form-control">
                                 </div>
@@ -132,8 +136,16 @@
                                 </div>
                                 <p>Select date and time slot:</p>
                                 <div class="row form-row">
-                                    <input type="date" name="appointmentDate" placeholder="Appointment Date" class="form-control">
+                                    <input type="date" name="appointmentDate" placeholder="Appointment Date" class="form-control" id="appointmentDate">
                                 </div>
+                                
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        var today = new Date().toISOString().split('T')[0];
+                                        document.getElementById('appointmentDate').setAttribute('min', today);
+                                    });
+                                </script>
+                                
                                 <input type="hidden" id="selectedTimeSlot" name="timeSlot">
 
                                 <div class="row form-row">
@@ -154,7 +166,7 @@
                             <p class="appointment-text">Booking appointment for <span class="doctor-name"><%= name %></span> (<span class="department"><%= category %></span>)</p>
 
                             <div class="row form-row">
-                                <button type="button" class="btn btn-success btn-appointment" name="fee"onclick="proceedToPay()">Proceed to pay ₹<%= fee %></button>
+                                <button type="button" class="btn btn-success btn-appointment" name="fee" onclick="proceedToPay()" style="padding: 15px 10px; margin-right: 20px;margin-left: 20px;margin-bottom: 20px">Pay ₹<%= fee %></button>
                             </div>
                         </form>
                     </div>
@@ -187,7 +199,7 @@
                 key,
                 amount,
                 currency,
-                name: "Your Company Name",
+                name: "Dolt Consultation",
                 description: "Appointment Booking",
                 order_id,
                 handler: function (response) {
@@ -208,21 +220,22 @@
         }
 
         async function verifyPayment(response) {
-            const verificationResponse = await fetch('/verify-payment', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(response)
-            });
+    const verificationResponse = await fetch('/verifypayment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(response)
+    });
 
-            const result = await verificationResponse.json();
-            if (result.status === 'success') {
-                window.location.href = '/home';
-            } else {
-                alert('Payment verification failed. Please try again.');
-            }
+    const result = await verificationResponse.json();
+    if (result.status === 'success') {
+        window.location.href = '/paymentsuccess';
+        } else { window.location.href = '/paymentsuccess';
+           ;
         }
+    }
+
     </script>
 </body>
   

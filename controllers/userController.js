@@ -10,6 +10,7 @@ const categoryModel = require('../model/category');
 const doctorModel = require('../model/doctorschema');
 const appointmentModel = require('../model/appointment');
 const crypto = require('crypto');
+const PDFDocument = require('pdfkit');
 
 const Razorpay = require('razorpay');
 const razorpay = new Razorpay({
@@ -28,7 +29,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 const login = (req, res) => {
-    res.render('login'); // Assuming 'login' is the directory and 'log' is the EJS file inside it
+    res.render('login'); 
 }
 
 
@@ -152,6 +153,7 @@ const postotp = async (req, res) => {
                 firstname: req.session.user.firstname,
                 lastname: req.session.user.lastname,
                 email: req.session.user.email,
+                phone:req.body.phonenumber,
                 password: hashedPassword, // Store the hashed password
                 // You may need to adjust this part depending on your schema
             });
@@ -332,35 +334,47 @@ const resetsuccess=(req,res)=>{
     res.render('resetsuccess')
 }
 
-const home=(req,res)=>{
-    res.render('home')
-}
+const home = async (req, res) => {
+    try {
+        const user = req.session.dataofuser.firstname;
+
+        // Fetch appointments for the user
+        const appointments = await appointmentModel.find({ user: req.session.dataofuser._id });
+        const doctors = await doctorModel.find().limit(4).populate('category');
+
+        res.render('home', { user, appointments,doctors });
+    } catch (error) {
+        console.error('Error fetching appointments:', error);
+        res.status(500).send('Error fetching appointments. Please try again later.');
+    }
+};
+
 
 
 const loginpost = async (req, res) => {
     try {
         const loguser = await userModel.findOne({ email: req.body.email });
+        
+        if (!loguser) {
+            return res.redirect('/login?errorMessage=Invalid%20email%20or%20password');
+        }
 
-        // if (loguser) {
-        //     if (loguser.isblocked) {
-        //         return res.redirect("/login?errorMessage=User%20is%20blocked");
-        //     }
-            const passwordMatch = await bcrypt.compare(req.body.password, loguser.password);
-            if (passwordMatch) {
-                req.session.dataofuser = loguser;
-                return res.redirect('/');
-            } else {
-                return res.redirect('/login?errorMessage=Invalid%20email%20or%20password');
-            }
-        // } else {
-        //     return res.redirect('/login?errorMessage=Invalid%20email%20or%20password');
-        // }
+        const passwordMatch = await bcrypt.compare(req.body.password, loguser.password);
+        
+        if (passwordMatch) {
+            req.session.dataofuser = loguser;
+
+            return res.redirect('/');
+        } else {
+            return res.redirect('/login?errorMessage=Invalid%20email%20or%20password');
+        }
     } catch (error) {
         console.log(error);
-        req.session.error = error;
+        req.session.error = "An error occurred. Please try again later.";
         return res.redirect('/login?errorMessage=An%20error%20occurred');
     }
 };
+
 
 
 
@@ -460,50 +474,82 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
+
+
+
 const appointmentget = (req, res) => {
-    const category = req.query.category; // Retrieve category from query string
-    const name = req.query.name; // Retrieve name from query string
-    const fee = req.query.fee; // Retrieve fee from query string
-    console.log('llll', category, name, fee, 'lllll');
+    const { doctor, category, name, fee } = req.query;
+
+    req.session.doctorname = doctor;
+    req.session.fee = fee;
+    req.session.category = category;
+
+    console.log('Doctor:', doctor, 'Category:', category, 'Name:', name, 'Fee:', fee);
+
     res.render('appointment', { category, name, fee });
 }
 
 
 
-const proceedToPay= async (req, res) => {
+const proceedToPay = async (req, res) => {
+    // Store appointment details in session
     req.session.appointmentDetails = {
         fullName: req.body.fullName,
         mobileNumber: req.body.mobileNumber,
         email: req.body.email,
         appointmentDate: req.body.appointmentDate,
         timeSlot: req.body.timeSlot,
-        fee: 500// Set the fee dynamically as per your requirement
+        fee: req.body.fee
     };
 
-    const payment_capture = 1;
-    const amount = req.session.appointmentDetails.fee * 100; // amount in the smallest currency unit (paise)
-    const currency = 'INR';
+    // Log appointment details
 
-    const options = {
-        amount,
-        currency,
-        receipt: `receipt_${Date.now()}`,
-        payment_capture
-    };
-
+    
     try {
+        // Create appointment document
+        const newAppointment = new appointmentModel({
+            patientName: req.body.fullName,
+            patientMobile: req.body.mobileNumber,
+            patientEmail: req.body.email,
+            appointmentDate: req.body.appointmentDate,
+            appointmentTime: req.body.timeSlot,
+            doctor:req.session.doctorname,
+            category:req.session.category,
+            fee:req.session.fee,
+            user:req.session.dataofuser._id
+           // Ensure req.session.name._id contains a valid doctor ID
+        });
+
+        // Save appointment to database
+        await newAppointment.save();
+
+        // Proceed with payment processing
+        const payment_capture = 1;
+        const amount = req.session.appointmentDetails.fee * 100; // amount in the smallest currency unit (paise)
+        const currency = 'INR';
+
+        const options = {
+            amount,
+            currency,
+            receipt: `receipt_${Date.now()}`,
+            payment_capture
+        };
+
+        // Create Razorpay order
         const order = await razorpay.orders.create(options);
         req.session.order_id = order.id;
+
+        // Respond with order details
         res.json({ order_id: order.id, amount: amount, currency: currency, key: process.env.KEY_ID });
     } catch (error) {
-        res.status(500).send('Error creating order');
+        console.error('Error creating appointment:', error);
+        res.status(500).send('Error creating appointment and order');
     }
-}
+};
 
 
 
-
-const verifypayment= (req, res) => {
+const verifypayment = (req, res) => {
     const { order_id, payment_id, signature } = req.body;
 
     const body = order_id + "|" + payment_id;
@@ -513,13 +559,219 @@ const verifypayment= (req, res) => {
 
     if (expectedSignature === signature) {
         // Payment successful
-        res.render('login')
+        res.status(200).json({ status: 'success' }); // Respond with success status
     } else {
         res.status(400).json({ status: 'failure' });
     }
 }
 
+const paymentsuccess=(req,res)=>{
+    res.render('paymentsuccess')
+}
 
+
+
+
+const invoice = async (req, res) => {
+    try {
+        const appointmentId = req.params.appointmentId;
+
+        // Fetch the appointment data
+        const appointment = await appointmentModel.findById(appointmentId).populate('user');
+        if (!appointment) {
+            return res.status(404).send('Appointment not found');
+        }
+
+        const user = appointment.user;
+        if (!user) {
+            return res.status(400).send('User not found');
+        }
+
+        // Constructing invoiceDetail object with available user information
+        const invoiceDetail = {
+            shipping: {
+                name: `${user.firstname} ${user.lastname}`,
+                email: user.email,
+                
+            },
+            items: [{
+                item: 'Consultation',
+                description: `Consultation with Dr. ${appointment.doctor}`,
+                quantity: 1,
+                price: appointment.fee,
+            }],
+            subtotal: appointment.fee,
+            total: Number(appointment.fee), // Assuming 50 is the shipping fee
+            order_number: appointmentId,
+            header: {
+                company_name: "Dolt",
+                company_address: "Dolt Consultation, 12 Keizersgracht Street, Netherlands, +1 234-567-890"
+            },
+            footer: {
+                text: "Thank you for connecting!",
+            },
+            currency_symbol: "₹",
+            date: {
+                billing_date: new Date().toLocaleDateString(),
+                due_date: new Date().toLocaleDateString(),
+            },
+        };
+
+        // Generating the PDF
+        const doc = new PDFDocument({ margin: 50 });
+
+        // Header
+        doc.fontSize(24).text('Receipt', { align: 'center', underline: true }).moveDown(1);
+
+        // Customer Details Section
+        doc.fontSize(12).text('Customer Details:', { underline: true }).moveDown(0.5);
+        doc.fontSize(10).text(`Name: ${invoiceDetail.shipping.name}`, { indent: 20 });
+        doc.fontSize(10).text(`Email: ${invoiceDetail.shipping.email}`, { indent: 20 });
+        doc.moveDown(1);
+
+        // Items Section
+        doc.fontSize(12).text('Appointment details:', { underline: true }).moveDown(0.5);
+        invoiceDetail.items.forEach(item => {
+            doc.fontSize(10).text(`Description: ${item.description}`, { indent: 20 });
+            doc.fontSize(10).text(`Speciality: ${appointment.category}`, { indent: 20 });
+            doc.fontSize(10).text(`Fee: ${invoiceDetail.currency_symbol}${item.price}/-`, { indent: 20 });
+            doc.fontSize(10).text(`Date: ${new Date(appointment.appointmentDate).toLocaleDateString()}`, { indent: 20 });
+            doc.fontSize(10).text(`Time: ${appointment.appointmentTime}`, { indent: 20 });
+            doc.moveDown(0.5);
+        });
+
+        // Payment Status Section
+        doc.fontSize(12).text('Payment Status', { underline: true }).moveDown(0.5);
+        doc.fontSize(10).text(`Amount paid: ${invoiceDetail.currency_symbol}${invoiceDetail.total}/- (PAID)`, { align: 'left' });
+
+        // Company Information Section
+        doc.fontSize(10).text(invoiceDetail.header.company_name, { align: 'center', margin: [0, 40, 0, 0] });
+        doc.fontSize(8).text(invoiceDetail.header.company_address, { align: 'center' }).moveDown(1);
+
+        // Footer
+        doc.fontSize(10).text(invoiceDetail.footer.text, { align: 'center', margin: [0, 60, 0, 0] });
+
+        // End the document
+        doc.end();
+
+        // Set response headers
+        res.setHeader('Content-Disposition', 'attachment; filename="invoice.pdf"');
+        res.setHeader('Content-Type', 'application/pdf');
+        doc.pipe(res);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('An error occurred while generating the invoice');
+    }
+};
+
+const recentlyConsulted = async (req, res) => {
+    try {
+        const currentDate = new Date(); // Get the current date
+        
+        // Find appointments where the appointment date is greater than or equal to the current date
+        const appointments = await appointmentModel.find({ 
+            user: req.session.dataofuser._id,
+            appointmentDate: { $lte: currentDate.toISOString() } // Convert current date to ISO string format
+        });
+
+        res.render('recentlycounsulted', { appointments });
+        console.log(appointments, 'llllllllllllllllllllllllllloooo');
+    } catch (error) {
+        console.error('Error fetching appointments:', error);
+        res.status(500).send('Error fetching appointments. Please try again later.');
+    }
+};
+const cancelAppointment = async (req, res) => {
+    try {
+        const appointmentId = req.params.appointmentId;
+        const appointment = await appointmentModel.findById(appointmentId);
+
+        if (!appointment) {
+            return res.status(404).json({ message: 'Appointment not found' });
+        }
+
+        // Find the user associated with the session
+        const user = await userModel.findById(req.session.dataofuser._id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Refund the appointment fee to the user's wallet
+        user.wallet += appointment.fee; // Increment wallet by appointment fee
+        await user.save();
+
+        // Delete the appointment
+        await appointment.deleteOne();
+
+        res.status(200).json({ message: 'Appointment cancelled successfully' });
+    } catch (error) {
+        console.error('Error cancelling appointment:', error);
+        res.status(500).json({ message: 'An error occurred while cancelling the appointment' });
+    }
+};
+
+
+
+
+const wallet = async (req, res) => {
+    try {
+        const user = req.session.dataofuser._id;
+
+        // Fetch user data from the database
+        const data = await userModel.findById(user);
+        if (!data) {
+            return res.status(404).send('User not found');
+        }
+
+        const amount = data.wallet;
+        const name = req.session.dataofuser.firstname;
+
+        // Render the wallet page with the user's amount and name
+        res.render('wallet', { amount, name });
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).send('An error occurred while fetching user data');
+    }
+};
+
+
+
+
+const walletpost = async (req, res) => {
+    try {
+        // Retrieve data from request body
+        const { amount, accountNumber } = req.body;
+
+        // Retrieve user's wallet details
+        const userId = req.session.dataofuser._id;
+        const user = await userModel.findById(userId);
+
+        // Update wallet balance
+        user.wallet -= amount;
+        await user.save();
+
+        // Do whatever you need to with the data
+        console.log('Amount:', amount);
+        console.log('Account Number:', accountNumber);
+
+        // Respond to the request
+        res.status(200).json({ message: 'Data received successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'An error occurred' });
+    }
+};
+
+
+const chatbot=(req,res)=>{
+    res.render('Aichatbot')
+}
+
+const logout = (req, res) => {
+    req.session.destroy();
+    res.redirect('/login');
+}
 
 
 module.exports={
@@ -543,5 +795,14 @@ module.exports={
     findDoctorsNearPlace,
     appointmentget,
     proceedToPay,
-    verifypayment
+    verifypayment,
+    paymentsuccess,
+    invoice,
+    recentlyConsulted,
+    cancelAppointment,
+    wallet,
+    walletpost,
+    chatbot,
+    logout
+    
 }

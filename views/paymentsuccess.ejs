@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Payment Success</title>
+    <!-- Add any necessary CSS styles here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 400px;
+            background: linear-gradient(135deg, #16222A, #3A6073);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        h1 {
+            color: #0059f1;
+            margin-bottom: 20px;
+            animation: slideInFromLeft 1s ease;
+        }
+        p {
+            margin-bottom: 20px;
+            animation: slideInFromRight 1s ease;
+        }
+        .button {
+            display: inline-block;
+            background-color: #08bd8a;
+            color: #fff;
+            font-size: 16px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            animation: fadeIn 1s ease;
+        }
+        .button:hover {
+            background-color: #0d47a1;
+        }
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInFromRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Appointment Payment Successful!</h1>
+        <p>Your appointment payment has been successfully processed.</p>
+        <!-- You can add additional details or options here -->
+        <a href="/" class="button">Go to Home</a>
+    </div>
+</body>
+</html>

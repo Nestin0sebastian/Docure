@@ -5,12 +5,17 @@
    firstname: String,
    lastname:String,
    email:String,
+  
    password:{
       type:String,
    } ,
-   isAdmin:{
+  isList:{
       type:Boolean,
       default:false
+   },  wallet: {
+      type: Number,
+      default: 0,
+      min: 0
    }
    });
 

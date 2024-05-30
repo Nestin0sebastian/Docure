@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot - Dark Theme</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid #333;
+      background-color: #1c1c1c;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .chat-header {
+      padding: 15px;
+      background-color: #2c2c2c;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #333;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .chat-header img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      border: 2px solid #4caf50;
+    }
+
+    .chat-header h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: #121212;
+      scrollbar-width: none;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      display: none;
+    }
+
+    .message {
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s;
+    }
+
+    .message p {
+      margin: 5px 0;
+      padding: 10px 15px;
+      border-radius: 20px;
+      display: inline-block;
+      max-width: 80%;
+      position: relative;
+    }
+
+    .message.user-message p {
+      background-color: #4caf50;
+      color: #fff;
+      align-self: flex-end;
+    }
+
+    .message.bot-message p {
+      background-color: #333;
+      align-self: flex-start;
+    }
+
+    .message.user-message p::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      transform: translateY(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent transparent #4caf50;
+    }
+
+    .message.bot-message p::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -10px;
+      transform: translateY(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent #333 transparent transparent;
+    }
+
+    .faq-container {
+      padding: 10px;
+      background-color: #2c2c2c;
+      border-bottom: 1px solid #333;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .faq-container h3 {
+      width: 100%;
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #4caf50;
+      text-align: center;
+    }
+
+    .faq-container .faq-item {
+      padding: 8px 12px;
+      margin: 5px;
+      background-color: #333;
+      border-radius: 20px;
+      cursor: pointer;
+      color: #fff;
+      transition: background-color 0.3s;
+      flex: 1 1 45%;
+      text-align: center;
+    }
+
+    .faq-container .faq-item:hover {
+      background-color: #444;
+    }
+
+    .chat-input {
+      padding: 10px;
+      background-color: #2c2c2c;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #333;
+      animation: slideUp 0.5s ease-out;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      margin-right: 10px;
+      background-color: #444;
+      color: #fff;
+      outline: none;
+      transition: background-color 0.3s;
+    }
+
+    .chat-input input:focus {
+      background-color: #555;
+    }
+
+    .chat-input button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background-color: #4caf50;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      outline: none;
+    }
+
+    .chat-input button:hover {
+      background-color: #45a049;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .back-symbol {
+    font-size: 10px; /* Adjust the size as needed */
+    display: block;
+  }
+  .back-text {
+    margin-top: -98px; /* Adjust the margin as needed to align with the symbol */
+  }
+
+
+
+  
+.back-button-container {
+            text-align: right; /* Align container to the right */
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 30px;
+            background-color: #000000; /* Button background color */
+            color: #ffffff; /* Button text color */
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #3d3a3b; /* Darker shade on hover */
+            transform: scale(1.05);
+        }
+
+        .back-button i {
+            margin-right: 3px; /* Space between icon and text */
+        }
+  </style>
+</head>
+<body>
+  
+ 
+    
+    
+  <div class="chat-container">
+    <div class="back-button-container">
+        <a class="back-button" href="javascript:history.back()">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+    </div>
+    <div class="chat-header">
+      <img src="https://via.placeholder.com/40" alt="Chatbot">
+      <h2>Chatbot</h2>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="message bot-message"><p>Hello! How can I assist you ?</p></div>
+    </div>
+    <div class="faq-container">
+      <h3>Frequently Asked Questions</h3>
+      <div class="faq-item" onclick="setInput('What are your office hours?')">What are your office hours?</div>
+      <div class="faq-item" onclick="setInput('How can I book an appointment?')">How can I book an appointment?</div>
+      <div class="faq-item" onclick="setInput('Can I book an appointment online?')">Can I book an appointment online?</div>
+      <div class="faq-item" onclick="setInput('What services do you offer?')">What services do you offer?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type your message...">
+      <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script>
+    const predefinedResponses = {
+      "what are your office hours?": "Our office hours are Monday to Saturday, 9 AM to 5 PM. We are closed on Sundays.",
+      "how can i book an appointment?": "You can book an appointment by clicking on the 'Book Appointment' button on our website or by calling us at (+1-133-726-7449).",
+      "can i book an appointment online?": "Yes, you can book an appointment online through our website. Just click on the 'Book Appointment' button and follow the instructions.",
+      "what services do you offer?": "We are dedicated to ensuring that you receive top-tier dental care by connecting you with the most skilled and experienced dental practitioners in our network.",
+      "hello": "Hello! How can I assist you today?",
+      "thank you": "You're welcome! If you have any other questions, feel free to ask.",
+      "thanks": "You're welcome! If you have any other questions, feel free to ask.",
+      "ok": "Okay! If you need further assistance, let me know.",
+      "okay": "Okay! If you need further assistance, let me know."
+      // Add more predefined responses as needed
+    };
+  
+    function setInput(question) {
+      document.getElementById('userInput').value = question;
+    }
+  
+    function sendMessage() {
+      const userInput = document.getElementById('userInput').value.trim().toLowerCase();
+      if (userInput === '') return;
+  
+      const chatMessages = document.getElementById('chatMessages');
+  
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('message', 'user-message');
+      userMessage.innerHTML = `<p>${userInput}</p>`;
+      chatMessages.appendChild(userMessage);
+  
+      let botResponse = "I'm not sure how to respond to that! You can connect with our team at (+1-133-726-7449).";
+      const matchedResponse = predefinedResponses[userInput];
+      if (matchedResponse) {
+        botResponse = matchedResponse;
+      }
+  
+      setTimeout(() => {
+        const botMessage = document.createElement('div');
+        botMessage.classList.add('message', 'bot-message');
+        botMessage.innerHTML = `<p>${botResponse}</p>`;
+        chatMessages.appendChild(botMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 500);
+  
+      document.getElementById('userInput').value = '';
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  </script>
+  
+  
+  
+</body>
+</html>

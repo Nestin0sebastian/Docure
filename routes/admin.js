@@ -3,6 +3,7 @@ var router = express.Router();
 const admin = require('../controllers/adminController')
 const category = require('../controllers/catagoryController')
 const path = require('path');
+const {adminchecksession,adminloginback}=require('../middlewares/adminauthenticate')
 
 const multer=require('multer')
 
@@ -18,20 +19,20 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-router.get('/login',admin.login)
+router.get('/login',adminloginback,admin.login)
 
 router.post('/loginpost',admin.adminloginpost)
 
-router.get('/',admin.home)
+router.get('/',adminchecksession,admin.home)
 
-router.get('/addcategory',category.addcategory)
+router.get('/addcategory',adminchecksession,category.addcategory)
 
 router.post('/addcatagorypost',category.addcategorypost)
 
-router.get('/catagorylist',admin.catagorylist)
+router.get('/catagorylist',adminchecksession,admin.catagorylist)
 
 
-router.get('/editcatagory/:id', admin.editget);
+router.get('/editcatagory/:id',adminchecksession, admin.editget);
 
 router.post('/catagorypost/:id',admin.editpost)
 
@@ -49,6 +50,14 @@ router.post('/editdoctorpost/:id',upload.single('doctor_image'),admin.editdoctor
 
 router.post('/doctorlisted',admin.doctorlisted)
 
+
+router.get('/appointmentget',admin.appointments)
+
+router.get('/userlist',admin.users)
+
+router.post('/userlist/:userId',admin.userlist)
+
+router.get('/logout',admin.logout)
 
 module.exports =router
 

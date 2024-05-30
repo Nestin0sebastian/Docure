@@ -3,7 +3,7 @@ var router = express.Router();
 const session = require('express-session');
 const multer=require('multer')
 const path = require('path');
-
+const userModel = require('../model/schema');
 // Configure multer storage
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -17,6 +17,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const categoryModel = require('../model/category');
 const doctorModel = require('../model/doctorschema');
+const appointmentModel = require('../model/appointment');
+
 
 
 
@@ -30,25 +32,33 @@ const login=(req,res)=>{
     res.render('admin/adminlogin')
   }
 
-  const data = {
-    email: "nestin@gmail.com",
-    password: "Nestin@123"
-};
+
 
 const adminloginpost = (req, res) => {
-    const { email, password } = req.body;
+  // Extract email and password from the request body
+  const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).send("Email and password are required");
-    }
+  // Check if both email and password are provided
+  if (!email || !password) {
+    return res.status(400).send("Email and password are required");
+  }
 
-    if (email === data.email && password === data.password) {
-        req.session.admin = email;
-        return res.redirect("/admin");
-    } else {
-        return res.status(401).send("Invalid email or password");
-    }
+  // Here, you would typically verify the credentials against your database
+  // For now, let's assume you have a hardcoded admin email and password
+  const adminEmail = "nestin@gmail.com";
+  const adminPassword ="Nestin@123";
+
+  // Check if the provided email and password match the admin credentials
+  if (email === adminEmail && password === adminPassword) {
+    // If credentials are correct, store the admin email in the session
+    req.session.admin = email;
+    return res.redirect("/admin");
+  } else {
+    // If credentials are incorrect, send a 401 Unauthorized response
+    return res.status(401).send("Invalid email or password");
+  }
 };
+
 
   const home=(req,res)=>{
     res.render('admin/home')
@@ -140,7 +150,7 @@ const addoctorpost = async (req, res) => {
       console.log(req.file);
       console.log(req.body);
 
-      const { name, doctor_name, experience, fee, place, time_schedule_start, time_schedule_end } = req.body;
+      const { name, doctor_name, clinic_name,experience, fee, place, time_schedule_start, time_schedule_end } = req.body;
       const doctor_image = req.file ? req.file.path.replace(/\\/g, '/').replace('public/', '/') : '';
 
       // Find the category by name
@@ -164,6 +174,7 @@ const addoctorpost = async (req, res) => {
 
       const newDoctor = {
           DoctorName: doctor_name,
+          clinic:clinic_name,
           category: category._id,
           Experience: experience,
           Fee: fee,
@@ -234,6 +245,8 @@ const editdoctorpost = async (req, res) => {
     // Update the doctor fields with the values from the request body
     if (req.body.doctor_name) {
       doctor.DoctorName = req.body.doctor_name;
+    }if (req.body.clinic) {
+      doctor.clinic = req.body.clinic;
     }
     if (req.body.experience) {
       doctor.Experience = req.body.experience;
@@ -290,13 +303,72 @@ const doctorlisted = async (req, res) => {
   }
 };
 
-module.exports = doctorlisted;
+const appointments = async (req, res) => {
+  try {
+    console.log('Fetching appointments from the database...');
+    
+    const appointments = await appointmentModel.find().populate('user'); // Populate user for debugging
+   
+    console.log(appointments, 'Fetched Appointments');
+    
+    res.render('admin/appointments', { appointments });
+  } catch (error) {
+    console.error('Error fetching appointments:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
 
+
+
+
+
+const users=async(req,res)=>{
+  const data=await userModel.find()
+  res.render('admin/userlist',{data})
+}
+
+
+const userlist = async (req, res) => {
+  const userId = req.params.userId; // Corrected variable name to userId
+  try {
+      const user = await userModel.findById(userId);
+      if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+      user.isList = !user.isList;
+      await user.save();
+      res.status(200).json({ message: 'User list status toggled successfully', user: user });
+  } catch (error) {
+      console.error('Error toggling user list status:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+
+
+const logout = (req, res) => {
+  // Check if the session exists
+  if (req.session && req.session.admin) {
+    // Destroy the session
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        res.status(500).send('An error occurred while logging out.');
+      } else {
+        // Redirect to the admin login page
+        res.redirect('/admin/login');
+      }
+    });
+  } else {
+    // If there is no session, redirect to the admin login page
+    res.redirect('/admin/login');
+  }
+};
 
   module.exports={
     login,
-    adminloginpost,
+    adminloginpost, 
     home,
     catagorylist,
     editget,
@@ -306,6 +378,10 @@ module.exports = doctorlisted;
     doctorlist,
     editdoctor,
     editdoctorpost,
-    doctorlisted
+    doctorlisted,
+    appointments,
+    users,
+    userlist,
+    logout
     
   }

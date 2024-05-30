@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <meta charset="utf-8">
     <title>Evara Dashboard</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -200,7 +202,47 @@
     line-height: 1.5; /* Adjust line height for better readability */
     font-family: 'Roboto', sans-serif; /* Specify a specific font family for a more attractive style */
 }
-  
+.back-button-container {
+            text-align: right; /* Align container to the right */
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 30px;
+            background-color: #000000; /* Button background color */
+            color: #ffffff; /* Button text color */
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #282828; /* Darker shade on hover */
+            transform: scale(1.05);
+        }
+
+        .back-button i {
+            margin-right: 8px; /* Space between icon and text */
+        }
+        @keyframes glow {
+        0% {
+            text-shadow: 0 0 5px #fcfcfc, 0 0 10px #ffffff, 0 0 15px #fff5f5, 0 0 20px #ffffff, 0 0 25px #ffffff, 0 0 30px #ffffff, 0 0 35px #ffffff;
+            opacity: 0.8;
+        }
+        50% {
+            opacity: 0.8;
+        }
+        100% {
+            text-shadow: 0 0 5px #000000, 0 0 10px #000000, 0 0 15px #000000, 0 0 20px #000000, 0 0 25px #000000, 0 0 30px #000000, 0 0 35px #000000;
+            opacity: 1;
+        }
+    }
+    .glowing-label {
+        animation: glow 2s infinite;
+    }
 </style>
 
 
@@ -213,6 +255,11 @@
     <div class="screen-overlay"></div>
 
     <section class="content-main">
+        <div class="back-button-container">
+            <a class="back-button" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
         <div class="container">
             <div class="header">
                 <h1><b>Doctors List</b></h1>
@@ -223,10 +270,14 @@
                         <option value="<%= doctor.category.name %>"><%= doctor.category.name %></option>
                     <% }); %>
                 </select>
-                <div style="display: flex;">
-                    <input type="text" id="searchPlace" placeholder="Enter a place" class="form-control" style="color: white; margin-right: 10px;">
-                    <button class="btn btn-brand" onclick="searchByPlace()" style="background-color: #ff6347; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px;">FIND</button>
+                <div style="display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 20px;">
+                    <label for="searchPlace" class="glowing-label" style="color: white; font-size: 18px; margin-bottom: 5px;">Find the nearest clinic:</label>
+                    <div style="display: flex;">
+                        <input type="text" id="searchPlace" placeholder="Enter a place" class="form-control" style="color: white; margin-right: 10px;">
+                        <button class="btn btn-brand" onclick="searchByPlace()" style="background-color: #ff6347; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px;">FIND</button>
+                    </div>
                 </div>
+                
                             </div>
             
             <script>
@@ -273,13 +324,13 @@
                                 <p class="card-text">
                                     <strong>Specialty:</strong> <%= doctor.category.name %><br>
                                     <strong>Experience:</strong> <%= doctor.Experience %> Years<br>
-                                    <strong>Location:</strong> <%= doctor.place %><br>
+                                    <strong></strong> <i class="fas fa-map-marker-alt"></i> <%= doctor.clinic %><br>
                                     <strong>Fee:</strong> ₹<%= doctor.Fee %>/-
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="text-muted"><%= doctor.Time %></span>
 <!-- Replace this part with your dynamic HTML template rendering system (e.g., EJS) -->
-<a href="/appointmentget?name=<%= doctor.DoctorName %>&category=<%= doctor.category.name %>&fee=<%= doctor.Fee %>" class="btn btn-primary">Book Appointment</a>
+                    <a href="/appointmentget?name=<%= doctor.DoctorName %>&category=<%= doctor.category.name %>&fee=<%= doctor.Fee %>&doctor=<%= doctor.DoctorName %>" class="btn btn-primary">Book Appointment</a>
                                 </div>
                             </div>
                         </div>

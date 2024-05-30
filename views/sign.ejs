@@ -3,101 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Sign Up Page</title>
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- Your custom CSS can go here if needed -->
-    <link rel="stylesheet" href="/stylesheets/sign.css">
+    <style>
+        /* Add your custom styles here */
+        #bgg {
+            background-color: #121212;
+            color: #fff;
+            padding: 50px 0;
+        }
+
+        #blackCard {
+            background-color: #1f1f1f;
+            color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-outline {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .form-outline input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #555;
+            border-radius: 0;
+            outline: none;
+            box-shadow: none;
+            padding: 0.5rem 0;
+            color: #fff;
+        }
+
+        .form-outline input:focus {
+            border-color: #aaa;
+        }
+
+        .form-outline label {
+            position: absolute;
+            top: 0.75rem;
+            left: 0;
+            color: #aaa;
+            transition: 0.3s;
+        }
+
+        .form-outline input:focus ~ label,
+        .form-outline input:not(:placeholder-shown) ~ label {
+            top: -0.25rem;
+            font-size: 0.75rem;
+            color: #4caf50;
+        }
+
+        .btn-primary {
+            background-color: #4caf50;
+            border-color: #4caf50;
+        }
+
+        .btn-primary:hover {
+            background-color: #388e3c;
+            border-color: #388e3c;
+        }
+
+        .btn-link {
+            color: #4caf50;
+        }
+    </style>
 </head>
-<body>
+<body id="bgg">
 
 <!-- Your existing HTML code here -->
 
-<div id="bodymain">
-    <!-- Section: Design Block -->
-<section class="">
-    <!-- Jumbotron -->
-    <div class="px-4 py-5 px-md-5 text-center text-lg-start" id="bgg">
-      <div class="container">
-        <div class="row gx-lg-5 align-items-center" style="
-        margin-top: 50px;">
-          <div class="col-lg-6 mb-5 mb-lg-0" id="hidex">
-            <h1 class="text-white">
-              When you smile, <br />
-              <span class="text-white"> The world smiles with you!</span>
-            </h1>
-            <p style="color: hsl(65, 100%, 39%); font-family: 'Arial', sans-serif; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); letter-spacing: 2px;">
-             - DOCURE group
-          </p>
-          
-          </div>
-  
-          <div class="col-lg-6 mb-5 mb-lg-0">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
             <div class="card" id="blackCard">
-              <div class="card-body py-5 px-md-5">
-                <form id="formm" action="/signupPost" method="post">
-                  <!-- 2 column grid layout with text inputs for the first and last names -->
-                  <div class="row">
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                        <input type="text" id="form3Example1" class="form-control" name="firstname" />
-                        <label class="form-label" for="form3Example1">First name</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                        <input type="text" id="form3Example2" class="form-control" name="lastname"/>
-                        <label class="form-label" for="form3Example2">Last name</label>
-                       
-                      </div>
-                    </div>
-                  </div>
-  
-                  <!-- Email input -->
-                  <div class="form-outline mb-4">
-                    <input type="email"  id="contact-email"  class="form-control" name="email"  onkeyup="validatEmail()" />
-                    <label class="form-label" for="form3Example3" >Email address</label>
-                    <span id="email-error"></span>
-                  </div>
-  
-                  <!-- Password input -->
-                  <div class="form-outline mb-4">
-                    <input type="password" id="password"  class="form-control" name="password"  onkeyup="validatpass()"  />
-                    <label class="form-label" for="form3Example4">Password</label>
-                    <span id="password-error"></span>
-                  </div>
-               
-                  <div class="form-outline mb-4">
-                    <input type="password" id="password"  class="form-control" name="conformPassword"  onkeyup="validatpass()"  />
-                    <label class="form-label" for="form3Example4">Conform Password</label>
-                    <span id="password-error"></span>
-                  </div>
-                  
-  
-                  <!-- Submit button -->
-                  <button type="submit" class="btn btn-primary btn-block mb-4" id="submit" onclick="return validForm()">
-                    Sign up
-                  </button>
-                  <span id="submit-error"></span>
-                  <p><a href="/login">already have an account?</a></p>
-  
-                
-
-  
-  
-                   
-                  </div>
-                </form>
-              </div>
+                <div class="card-body py-5 px-md-5">
+                    <form id="formm" action="/signupPost" method="post">
+                        <div class="form-outline">
+                            <input type="text" id="form3Example1" class="form-control" name="firstname" required />
+                            <label class="form-label" for="form3Example1">First name</label>
+                        </div>
+                        <div class="form-outline">
+                            <input type="text" id="form3Example2" class="form-control" name="lastname" required />
+                            <label class="form-label" for="form3Example2">Last name</label>
+                        </div>
+                        <div class="form-outline">
+                            <input type="email" id="contact-email" class="form-control" name="email" onkeyup="validatEmail()" required />
+                            <label class="form-label" for="contact-email">Email address</label>
+                            <span id="email-error"></span>
+                        </div>
+                        <div class="form-outline">
+                            <input type="tel" id="form3Example2" class="form-control" name="phonenumber" required />
+                            <label class="form-label" for="form3Example2">Phone number</label>
+                        </div>
+                        
+                        <div class="form-outline">
+                            <input type="password" id="password" class="form-control" name="password" onkeyup="validatpass()" required />
+                            <label class="form-label" for="password">Password</label>
+                            <span id="password-error"></span>
+                        </div>
+                        <div class="form-outline">
+                            <input type="password" id="password" class="form-control" name="conformPassword" onkeyup="validatpass()" required />
+                            <label class="form-label" for="password">Confirm Password</label>
+                            <span id="password-error"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+                        <p class="text-center"><a href="/login" class="btn btn-link">Already have an account?</a></p>
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <!-- Jumbotron -->
-  </section>
-  <!-- Section: Design Block -->
 </div>
 
 <!-- Add Bootstrap JS and jQuery (optional) -->

@@ -24,8 +24,29 @@ const appointmentSchema = new Schema({
         required: true
     },
     doctor: {
-        type: Schema.Types.ObjectId,
-        ref: 'Doctor', // Reference to the Doctor model
+
+        type: String,
+        required: true
+
+    },  
+      category: {
+
+        type: String,
+        required: true
+
+    },
+    fee: {
+
+        type: String,
+        required: true
+
+    }
+    
+
+    , 
+     user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userdb',
         required: true
     },
  
